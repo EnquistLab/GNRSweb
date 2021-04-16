@@ -1,9 +1,11 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
+
+import {Layout} from '../components/'
 
 export default function Index() {
   return (
-    <Container maxWidth="sm">
-    </Container>
+    <Layout>
+      Test layout
+    </Layout>
   );
 }
