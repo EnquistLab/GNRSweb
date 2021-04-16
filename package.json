@@ -5,7 +5,9 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.11.2",
+    "axios": "^0.21.1",
     "clsx": "latest",
+    "lodash": "^4.17.21",
     "next": "latest",
     "prop-types": "latest",
     "react": "latest",
