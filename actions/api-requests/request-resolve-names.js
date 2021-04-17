@@ -1,28 +1,23 @@
 import axios from "axios";
-import _ from "lodash";
+
 const apiEndPoint = process.env.apiEndPoint;
 
-export const requestResolveNames = (queryNames) => {
-  // query object sent to the api
-  const queryObject = {
+export const requestResolveNames = async (queryNames) => {
+  let arrayNames = queryNames.split('\n').map((rows) => rows.split(',') )
+  // 
+  const parseObject = {
     opts: {
       mode: "resolve",
-      batches: 1,
     },
-    data: queryNames,
+    data: arrayNames,
   };
-  // sending the request to the API
-  return axios
-    .post(apiEndPoint, queryObject, {
+  // 
+  return await axios
+    .post(apiEndPoint, parseObject, {
       headers: { "Content-Type": "application/json" },
     })
-    .then(
-      (response) => {
-        // group data
-        return response.data;
-      },
-      () => {
-        alert("Error fetching data from API");
-      }
-    );
+    .then((response) => {
+      return response.data
+      //setParsedNames(response.data);
+    });
 };
