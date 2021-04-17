@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useStyles } from "./search-box.style";
 import {
   Paper,
@@ -7,7 +8,8 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 
-export function SearchBox() {
+export function SearchBox({ onSubmit, isProcessing }) {
+  const [names, setNames] = useState("");
   const classes = useStyles();
   return (
     <Paper className={classes.paper}>
@@ -25,9 +27,9 @@ export function SearchBox() {
             fullWidth
             variant="outlined"
             label="Records to check"
-            //value={input}
+            value={names}
             helperText="Enter up to 5000 record"
-            onChange={(e) => alert(e.target.value)}
+            onChange={(e) => setNames(e.target.value)}
           />
         </Box>
         <Box
@@ -40,7 +42,7 @@ export function SearchBox() {
           <Box>
             <Button
               // disable={loadingStatus.toString()}
-              // onClick={() => onSearch(input)}
+              onClick={() => onSubmit(names)}
               variant="contained"
               color="primary"
             >
@@ -57,7 +59,7 @@ export function SearchBox() {
             </Button>
           </Box>
           <Box flexGrow={1} />
-          <Box>{/* loadingStatus && <CircularProgress size={30} /> */}</Box>
+          <Box>{isProcessing && <CircularProgress size={30} />}</Box>
         </Box>
       </Box>
     </Paper>
