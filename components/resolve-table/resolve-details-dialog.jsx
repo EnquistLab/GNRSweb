@@ -4,7 +4,6 @@ import {
   DialogTitle,
   Button,
   TableContainer,
-  TableHead,
   TableRow,
   TableCell,
   TableBody,
@@ -17,14 +16,14 @@ export default function DetailsDialog(props) {
   // make a copy of the object being displayed
   let dataToDisplay = { ...row };
   // delete rows
-  delete dataToDisplay.ID;
+  // delete dataToDisplay.ID;
 
   return (
     <Dialog open={open} maxWidth="lg">
       <DialogTitle>Name submited: {dataToDisplay.Name_submitted}</DialogTitle>
       <Box m={4} mt={0}>
         <TableContainer>
-          <Table size='small'>
+          <Table size="small">
             <TableBody>
               {Object.entries(dataToDisplay).map(([key, value], idx) => (
                 <TableRow key={idx}>
@@ -42,4 +41,3 @@ export default function DetailsDialog(props) {
     </Dialog>
   );
 }
-

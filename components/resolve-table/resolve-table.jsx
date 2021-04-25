@@ -17,9 +17,9 @@ import {
 import DetailsDialog from "./resolve-details-dialog";
 import { TablePaginationActions } from "../";
 
-//import { getComparator, stableSort } from "../../actions";
+import { getComparator, stableSort } from "../../actions";
 
-export function ParseTable({ tableData }) {
+export function ResolveTable({ tableData }) {
   // states
   const [dataPopUpOpen, setDataPopUpOpen] = useState(false);
   const [popUpDetails, setPopUpDetails] = useState({});
@@ -54,26 +54,12 @@ export function ParseTable({ tableData }) {
     setOrderBy(property);
   };
 
-  const renderRow = (row) => {
+  const renderRow = (row, id) => {
     let rowData = getRowData(row.ID);
     return (
-      <TableRow key={row.ID}>
-        <TableCell>{row.Name_submitted} </TableCell>
-        <TableCell>
-          {row.Genus +
-            " " +
-            row.Specific_epithet +
-            " " +
-            row.Infraspecific_rank +
-            " " +
-            row.Infraspecific_epithet +
-            " " +
-            row.Infraspecific_rank_2 +
-            " " +
-            row.Infraspecific_epithet_2}
-        </TableCell>
-        <TableCell>{row.Author}</TableCell>
-        <TableCell>{row.Unmatched_terms}</TableCell>
+      <TableRow key={id}>
+        <TableCell>{row.country} </TableCell>
+        <TableCell>{row.state_province} </TableCell>
         <TableCell>
           {
             <Link
@@ -91,42 +77,44 @@ export function ParseTable({ tableData }) {
     );
   };
 
-  return (
-    <>
-      <Box m={2} mb={0}>
-        <TableContainer>
-          <Table size="small">
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
+  if (tableData)
+    return (
+      <>
+        <Box m={2} mb={0}>
+          <TableContainer>
+            <Table size="small">
+              <EnhancedTableHead
+                order={order}
+                orderBy={orderBy}
+                onRequestSort={handleRequestSort}
+              />
+              <TableBody>
+                {stableSort(tableData, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map(renderRow)}
+              </TableBody>
+            </Table>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={tableData.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+              ActionsComponent={TablePaginationActions}
             />
-            <TableBody>
-              {stableSort(tableData, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(renderRow)}
-            </TableBody>
-          </Table>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={tableData.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-            ActionsComponent={TablePaginationActions}
-          />
-        </TableContainer>
-      </Box>
+          </TableContainer>
+        </Box>
 
-      <DetailsDialog
-        open={dataPopUpOpen}
-        onClose={handleClickClose}
-        row={popUpDetails}
-      />
-    </>
-  );
+        <DetailsDialog
+          open={dataPopUpOpen}
+          onClose={handleClickClose}
+          row={popUpDetails}
+        />
+      </>
+    );
+  else return <></>;
 }
 
 function EnhancedTableHead(props) {
@@ -136,10 +124,8 @@ function EnhancedTableHead(props) {
   };
   // to save space we define a vector with the names of the columns
   let tableColumns = [
-    ["Name_submitted", "Name Submitted"],
-    ["Genus", "Genus"],
-    ["Author", "Author"],
-    ["Unmatched_terms", "Unmatched Terms"],
+    ["country", "Country"],
+    ["state_province", "State Province"],
   ];
 
   // we render the names using a map
