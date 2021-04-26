@@ -12,6 +12,7 @@ import {
   TableSortLabel,
   Link,
   Table,
+  Paper,
 } from "@material-ui/core";
 
 import DetailsDialog from "./resolve-details-dialog";
@@ -77,41 +78,43 @@ export function ResolveTable({ tableData }) {
     );
   };
 
-  if (tableData)
+  // only show the table when data is available
+  if (tableData.length > 0)
     return (
       <>
-        <Box m={2} mb={0}>
-          <TableContainer>
-            <Table size="small">
-              <EnhancedTableHead
-                order={order}
-                orderBy={orderBy}
-                onRequestSort={handleRequestSort}
+        <Paper>
+          <Box m={2}>
+            <TableContainer>
+              <Table size="small">
+                <EnhancedTableHead
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={handleRequestSort}
+                />
+                <TableBody>
+                  {stableSort(tableData, getComparator(order, orderBy))
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map(renderRow)}
+                </TableBody>
+              </Table>
+              <TablePagination
+                rowsPerPageOptions={[10, 25, 100]}
+                component="div"
+                count={tableData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
               />
-              <TableBody>
-                {stableSort(tableData, getComparator(order, orderBy))
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map(renderRow)}
-              </TableBody>
-            </Table>
-            <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={tableData.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-            />
-          </TableContainer>
-        </Box>
-
-        <DetailsDialog
-          open={dataPopUpOpen}
-          onClose={handleClickClose}
-          row={popUpDetails}
-        />
+            </TableContainer>
+          </Box>
+          <DetailsDialog
+            open={dataPopUpOpen}
+            onClose={handleClickClose}
+            row={popUpDetails}
+          />
+        </Paper>
       </>
     );
   else return <></>;

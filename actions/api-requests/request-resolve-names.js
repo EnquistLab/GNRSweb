@@ -3,7 +3,9 @@ import axios from "axios";
 const apiEndPoint = process.env.apiEndPoint;
 
 export const requestResolveNames = async (queryNames) => {
-  let arrayNames = queryNames.split('\n').map((rows) => rows.split(',') )
+  let arrayNames = queryNames.split('\n')
+    .filter((row) => row)
+    .map((rows) => rows.split(',') )
   // 
   const parseObject = {
     opts: {

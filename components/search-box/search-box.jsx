@@ -51,7 +51,7 @@ export function SearchBox({ onSubmit, isProcessing }) {
           </Box>
           <Box>
             <Button
-              // onClick={() => setInput("")}
+              onClick={() => setNames("")}
               variant="contained"
               color="secondary"
             >
