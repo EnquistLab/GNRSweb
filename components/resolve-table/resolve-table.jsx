@@ -51,7 +51,7 @@ export function ResolveTable({ tableData }) {
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
+   setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
@@ -61,6 +61,7 @@ export function ResolveTable({ tableData }) {
       <TableRow key={id}>
         <TableCell>{row.country} </TableCell>
         <TableCell>{row.state_province} </TableCell>
+        <TableCell>{row.county_parish} </TableCell>
         <TableCell>
           {
             <Link
@@ -128,6 +129,7 @@ function EnhancedTableHead(props) {
   // to save space we define a vector with the names of the columns
   let tableColumns = [
     ["country", "Country"],
+    ["county_parish", "County"],
     ["state_province", "State Province"],
   ];
 
