@@ -58,6 +58,9 @@ export function SearchBox({ onSubmit, isProcessing }) {
               Clear
             </Button>
           </Box>
+          <Box width={1/24}>
+            <TextField variant='outlined' size='small' value=',' />
+          </Box>
           <Box flexGrow={1} />
           <Box>{isProcessing && <CircularProgress size={30} />}</Box>
         </Box>
