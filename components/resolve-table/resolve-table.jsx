@@ -62,6 +62,7 @@ export function ResolveTable({ tableData }) {
         <TableCell>{row.country} </TableCell>
         <TableCell>{row.state_province} </TableCell>
         <TableCell>{row.county_parish} </TableCell>
+        <TableCell></TableCell>
         <TableCell>
           {
             <Link
@@ -155,6 +156,7 @@ function EnhancedTableHead(props) {
           // here we add the previously rendered table cells
           tableColumnsJsx
         }
+        <TableCell>Overall Score</TableCell>
         <TableCell>Details</TableCell>
       </TableRow>
     </TableHead>
