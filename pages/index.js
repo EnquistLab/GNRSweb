@@ -8,9 +8,16 @@ export default function Index() {
   const [isProcessing, setIsProcessing] = useState(false)
 
   const handleResolveNames = async (names) => {
+    // clear the table after submiting
+    setResolvedNames([])
+    // show spinner
     setIsProcessing(true)
+
+    // resolve the names
     let resolvedNames = await requestResolveNames(names)
     setResolvedNames(resolvedNames )
+
+    // hide spinner
     setIsProcessing(false)
   }
 
