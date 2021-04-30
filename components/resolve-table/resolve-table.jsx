@@ -51,7 +51,7 @@ export function ResolveTable({ tableData }) {
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
-   setOrder(isAsc ? "desc" : "asc");
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
@@ -59,9 +59,18 @@ export function ResolveTable({ tableData }) {
     let rowData = getRowData(row.ID);
     return (
       <TableRow key={id}>
-        <TableCell>{row.country} </TableCell>
-        <TableCell>{row.state_province} </TableCell>
-        <TableCell>{row.county_parish} </TableCell>
+        <TableCell>
+          {[
+            row.country_verbatim,
+            row.county_parish_verbatim,
+            row.state_province_verbatim,
+          ]
+            .filter((row) => row)
+            .join(":")}
+        </TableCell>
+        <TableCell>{row.country}</TableCell>
+        <TableCell>{row.state_province}</TableCell>
+        <TableCell>{row.county_parish}</TableCell>
         <TableCell></TableCell>
         <TableCell>
           {
@@ -129,6 +138,7 @@ function EnhancedTableHead(props) {
   };
   // to save space we define a vector with the names of the columns
   let tableColumns = [
+    ["country_verbatim", "Political Division Submitted"],
     ["country", "Country"],
     ["county_parish", "County"],
     ["state_province", "State Province"],
