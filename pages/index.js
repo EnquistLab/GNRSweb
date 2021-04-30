@@ -11,14 +11,22 @@ export default function Index() {
   const [resolvedNames, setResolvedNames] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleResolveNames = async (names) => {
+  const handleResolveNames = async (names, separator) => {
     // clear the table after submiting
     setResolvedNames([]);
     // show spinner
     setIsProcessing(true);
 
+    // split names
+    let arrayNames = names 
+      .split("\n")
+      // remove empty rows
+      .filter((row) => row)
+      // split fields and concatenate empty id
+      .map((rows) => [""].concat(rows.split(separator)));
+
     // resolve the names
-    let resolvedNames = await requestResolveNames(names);
+    let resolvedNames = await requestResolveNames(arrayNames);
     setResolvedNames(resolvedNames);
 
     // hide spinner
