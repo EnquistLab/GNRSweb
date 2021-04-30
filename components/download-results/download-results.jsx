@@ -21,7 +21,7 @@ export function DownloadResults({ data }) {
   // controls the popup visibility
   const [open, setOpen] = useState(false);
   // the filename when downloading
-  const [fileName, setFileName] = useState("tnrs_result");
+  const [fileName, setFileName] = useState("gnrs_result");
   // default format when downloading
   const [fileFormat, setFileFormat] = useState("csv");
 

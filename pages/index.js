@@ -1,29 +1,33 @@
-import {useState} from 'react';
+import { useState } from "react";
 
-import {Layout, SearchBox, ResolveTable } from '../components/'
-import { requestResolveNames } from '../actions/'
+import {
+  Layout,
+  SearchBox,
+  ResolveTable,
+} from "../components/";
+import { requestResolveNames } from "../actions/";
 
 export default function Index() {
-  const [resolvedNames, setResolvedNames] = useState([])
-  const [isProcessing, setIsProcessing] = useState(false)
+  const [resolvedNames, setResolvedNames] = useState([]);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleResolveNames = async (names) => {
     // clear the table after submiting
-    setResolvedNames([])
+    setResolvedNames([]);
     // show spinner
-    setIsProcessing(true)
+    setIsProcessing(true);
 
     // resolve the names
-    let resolvedNames = await requestResolveNames(names)
-    setResolvedNames(resolvedNames )
+    let resolvedNames = await requestResolveNames(names);
+    setResolvedNames(resolvedNames);
 
     // hide spinner
-    setIsProcessing(false)
-  }
+    setIsProcessing(false);
+  };
 
   return (
     <Layout>
-      <SearchBox onSubmit={handleResolveNames} isProcessing={isProcessing}/>
+      <SearchBox onSubmit={handleResolveNames} isProcessing={isProcessing} />
       <ResolveTable tableData={resolvedNames} />
     </Layout>
   );

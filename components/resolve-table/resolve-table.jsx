@@ -16,9 +16,10 @@ import {
 } from "@material-ui/core";
 
 import DetailsDialog from "./resolve-details-dialog";
-import { TablePaginationActions } from "../";
+import { TablePaginationActions, DownloadResults } from "../";
 
 import { getComparator, stableSort } from "../../actions";
+
 
 export function ResolveTable({ tableData }) {
   // states
@@ -94,6 +95,9 @@ export function ResolveTable({ tableData }) {
     return (
       <>
         <Paper>
+          <Box pt={2} m={2} mb={0}>
+            <DownloadResults data={tableData} />
+          </Box>
           <Box m={2}>
             <TableContainer>
               <Table size="small">
