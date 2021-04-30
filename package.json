@@ -7,6 +7,8 @@
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
     "clsx": "latest",
+    "file-saver": "^2.0.5",
+    "json2csv": "^5.0.6",
     "lodash": "^4.17.21",
     "next": "latest",
     "prop-types": "latest",
