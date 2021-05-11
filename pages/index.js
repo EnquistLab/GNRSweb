@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 import {
   Layout,
@@ -6,6 +6,7 @@ import {
   ResolveTable,
 } from "../components/";
 import { requestResolveNames } from "../actions/";
+
 
 export default function Index() {
   const [resolvedNames, setResolvedNames] = useState([]);
@@ -16,7 +17,6 @@ export default function Index() {
     setResolvedNames([]);
     // show spinner
     setIsProcessing(true);
-
     // split names
     let arrayNames = names 
       .split("\n")
@@ -27,6 +27,8 @@ export default function Index() {
 
     // resolve the names
     let resolvedNames = await requestResolveNames(arrayNames);
+
+    // console.log(resolvedNames)
     setResolvedNames(resolvedNames);
 
     // hide spinner
