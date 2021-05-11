@@ -18,7 +18,7 @@ export default function Index() {
     // show spinner
     setIsProcessing(true);
     // split names
-    let arrayNames = names 
+    let arrayNames = names
       .split("\n")
       // remove empty rows
       .filter((row) => row)

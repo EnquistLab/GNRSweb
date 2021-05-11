@@ -1,5 +1,4 @@
-import { useState } from "react";
-import _ from "lodash";
+import React, { useState } from "react";
 
 import {
   Box,
@@ -72,7 +71,7 @@ export function ResolveTable({ tableData }) {
         <TableCell>{row.country}</TableCell>
         <TableCell>{row.state_province}</TableCell>
         <TableCell>{row.county_parish}</TableCell>
-        <TableCell></TableCell>
+        <TableCell>{row.overall_score}</TableCell>
         <TableCell>
           {
             <Link
