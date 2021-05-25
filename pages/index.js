@@ -12,22 +12,12 @@ export default function Index() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isBadInput, setIsBadInput] = useState(false);
 
-  const handleResolveNames = async (names, separator) => {
+  const handleResolveNames = async (names) => {
     // clear the table after submiting
     setResolvedNames([]);
     // show spinner
     setIsProcessing(true);
     setIsBadInput(false);
-
-    // split names
-    /*
-    let arrayNames = names
-      .split("\n")
-      // remove empty rows
-      .filter((row) => row)
-      // split fields and concatenate empty id
-        .map((rows) => [""].concat(rows.split(separator)));
-    */
 
     // use the CSV library to read the names
     let splitNames = readString(names)["data"];

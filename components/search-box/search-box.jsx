@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, React } from "react";
 import { useStyles } from "./search-box.style";
 import {
   Paper,
@@ -10,7 +10,6 @@ import {
 
 export function SearchBox({ onSubmit, isProcessing }) {
   const [names, setNames] = useState("");
-  const [separator, setSeparator] = useState(",");
 
   const classes = useStyles();
   return (
@@ -44,7 +43,7 @@ export function SearchBox({ onSubmit, isProcessing }) {
           <Box>
             <Button
               // disable={loadingStatus.toString()}
-              onClick={() => onSubmit(names, separator)}
+              onClick={() => onSubmit(names)}
               variant="contained"
               color="primary"
             >
@@ -59,15 +58,6 @@ export function SearchBox({ onSubmit, isProcessing }) {
             >
               Clear
             </Button>
-          </Box>
-          <Box ml={1} width={1 / 14}>
-            <TextField
-              size="small"
-              label="Separator"
-              variant="outlined"
-              value={separator}
-              onChange={(e) => setSeparator(e.target.value)}
-            />
           </Box>
           <Box flexGrow={1} />
           <Box>{isProcessing && <CircularProgress size={30} />}</Box>
