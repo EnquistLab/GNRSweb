@@ -63,6 +63,6 @@ export function SearchBox({ onSubmit, isProcessing }) {
           <Box>{isProcessing && <CircularProgress size={30} />}</Box>
         </Box>
       </Box>
-    </Paper>
+   </Paper>
   );
 }

@@ -46,7 +46,7 @@ export function ResolveTable({ tableData }) {
   };
 
   const getRowData = (id) => {
-    return tableData.filter((row) => row.ID == id)[0];
+    return tableData.filter((row) => row.poldiv_full == id)[0];
   };
 
   const handleRequestSort = (event, property) => {
@@ -56,7 +56,7 @@ export function ResolveTable({ tableData }) {
   };
 
   const renderRow = (row, id) => {
-    let rowData = getRowData(row.ID);
+    let rowData = getRowData(row.poldiv_full);
     return (
       <TableRow key={id}>
         <TableCell>
