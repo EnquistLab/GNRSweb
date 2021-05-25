@@ -5,18 +5,19 @@ import { ContainerLG } from "../";
 function GNRSFooter() {
   return (
     <>
-      <Box display="flex" alignItems="flex-end">
-        <Box>
-          <img src="world.png" height="80"></img>
+      <Box display="flex" flexDirection='column' alignContent='center' alignItems='center'>
+        <Box display="flex" alignItems="flex-end">
+          <Box>
+            <img src="world.png" height="80"></img>
+          </Box>
+          <Box ml={2}>
+            <Typography variant="h3">GNRS</Typography>
+            <Typography variant="h6">
+              Geographic Name Resolution Service
+            </Typography>
+          </Box>
         </Box>
-        <Box ml={2}>
-          <Typography variant="h3">GNRS</Typography>
-          <Typography variant="h6">
-            Geographic Name Resolution Service
-          </Typography>
-        </Box>
-        <Box flexGrow={1}></Box>
-        <Box width={1 / 4}>
+        <Box width={1/4} mt={1}>
           An online tool for the standardization of global political division
           names.
         </Box>
