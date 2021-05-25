@@ -11,6 +11,7 @@
     "json2csv": "^5.0.6",
     "lodash": "^4.17.21",
     "next": "latest",
+    "papaparse": "^5.3.0",
     "prop-types": "latest",
     "react": "latest",
     "react-dom": "latest"
