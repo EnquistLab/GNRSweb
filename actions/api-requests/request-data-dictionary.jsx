@@ -2,6 +2,14 @@ import axios from "axios";
 
 const apiEndPoint = process.env.apiEndPoint;
 
+/*
+  Response format:
+    col_name
+    ordinal_position
+    data_type
+    description
+*/
+
 export const requestDataDictionary = async () => {
   const parseObject = {
     opts: {
