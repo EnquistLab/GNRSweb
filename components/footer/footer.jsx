@@ -5,10 +5,10 @@ import { ContainerLG } from "../";
 function GNRSFooter() {
   return (
     <>
-      <Box display="flex" flexDirection='column' alignContent='center' alignItems='center'>
+      <Box display="flex" flexDirection='column' alignItems='left'>
         <Box display="flex" alignItems="flex-end">
           <Box>
-            <img src="world.png" height="80"></img>
+            <img src="/world.png" height="80"></img>
           </Box>
           <Box ml={2}>
             <Typography variant="h3">GNRS</Typography>
@@ -28,7 +28,7 @@ function GNRSFooter() {
             <Box display="flex">
               <Box flexGrow={1}></Box>
               <Box>
-                <img src="bien.png" height="50"></img>
+                <img src="/bien.png" height="50"></img>
               </Box>
             </Box>
           </Grid>
@@ -39,7 +39,7 @@ function GNRSFooter() {
             <Box display="flex">
               <Box flexGrow={1}></Box>
               <Box>
-                <img src="uoa.png" height="50"></img>
+                <img src="/uoa.png" height="50"></img>
               </Box>
             </Box>
           </Grid>
@@ -50,7 +50,7 @@ function GNRSFooter() {
             <Box display="flex">
               <Box flexGrow={1}></Box>
               <Box>
-                <img src="nsf.png" height="50"></img>
+                <img src="/nsf.png" height="50"></img>
               </Box>
             </Box>
           </Grid>
@@ -63,7 +63,7 @@ function GNRSFooter() {
             <Box display="flex">
               <Box flexGrow={1}></Box>
               <Box>
-                <img src="globe.png" height="50"></img>
+                <img src="/globe.png" height="50"></img>
               </Box>
             </Box>
           </Grid>
@@ -74,7 +74,7 @@ function GNRSFooter() {
             <Box display="flex">
               <Box flexGrow={1}></Box>
               <Box>
-                <img src="lines.png" height="50"></img>
+                <img src="/lines.png" height="50"></img>
               </Box>
             </Box>
           </Grid>
@@ -90,7 +90,7 @@ function GNRSFooter() {
 export function Footer() {
   return (
     <footer>
-      <Box py={10} bgcolor="gray">
+      <Box py={4} bgcolor="gray">
         <ContainerLG>
           <GNRSFooter />
         </ContainerLG>
