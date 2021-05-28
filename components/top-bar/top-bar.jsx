@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, React } from "react";
 import Link from "next/link";
 
 import {
@@ -21,9 +21,6 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
@@ -73,6 +70,11 @@ export function TopBar() {
                 Home
               </Button>
             </Link>
+            <Link href="/data_dictionary" passHref>
+              <Button component="a" color="inherit">
+                Data Dictionary
+              </Button>
+            </Link>
           </Hidden>
         </Toolbar>
       </Container>
@@ -111,6 +113,9 @@ export function LowResMenu() {
       >
         <MenuItem onClick={handleClose} component={MUILink} href="/">
           Home
+        </MenuItem>
+        <MenuItem onClick={handleClose} component={MUILink} href="/data_dictionary">
+          Data Dictionary
         </MenuItem>
       </Menu>
     </div>
