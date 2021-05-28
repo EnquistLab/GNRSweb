@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-
 import { readString } from "react-papaparse";
-
 import { Layout, SearchBox, ResolveTable } from "../components/";
 import { requestResolveNames } from "../actions/";
-
 import { Typography, Paper, Box } from "@material-ui/core";
 
 export default function Index() {
@@ -22,7 +19,9 @@ export default function Index() {
     // use the CSV library to read the names
     let splitNames = readString(names)["data"];
     // when we pass it to the API we add one empty column
-    splitNames = splitNames.map((rows) => [""].concat(rows));
+    splitNames = splitNames
+      .filter((row) => row.length == 3) // this will remove blank lines
+      .map((row) => [""].concat(row));
 
     // check if all elements have 4 columns
     if (splitNames.every((row) => row.length == 4) == false) {
