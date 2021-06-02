@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   Box,
@@ -16,11 +16,13 @@ import {
 
 import DetailsDialog from "./resolve-details-dialog";
 import { TablePaginationActions, DownloadResults } from "../";
-
+import { requestDataDictionary } from "../../actions/";
 import { getComparator, stableSort } from "../../actions";
 
-
 export function ResolveTable({ tableData }) {
+  let dict = requestDataDictionary();
+  dict.then((data)=> console.log(data))
+
   // states
   const [dataPopUpOpen, setDataPopUpOpen] = useState(false);
   const [popUpDetails, setPopUpDetails] = useState({});

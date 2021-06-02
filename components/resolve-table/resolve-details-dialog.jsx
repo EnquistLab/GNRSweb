@@ -1,3 +1,4 @@
+import { React } from "react";
 import {
   Box,
   Dialog,
@@ -12,7 +13,7 @@ import {
 
 // shows the dialog with details of each row
 export default function DetailsDialog(props) {
-  const { onClose, open, row } = props;
+  let { onClose, open, row,  } = props;
   // make a copy of the object being displayed
   let dataToDisplay = { ...row };
   // delete rows
@@ -41,3 +42,4 @@ export default function DetailsDialog(props) {
     </Dialog>
   );
 }
+
