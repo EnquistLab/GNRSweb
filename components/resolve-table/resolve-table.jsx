@@ -20,19 +20,33 @@ import { requestDataDictionary } from "../../actions/";
 import { getComparator, stableSort } from "../../actions";
 
 export function ResolveTable({ tableData }) {
-  let dict = requestDataDictionary();
-  dict.then((data)=> console.log(data))
-
   // states
   const [dataPopUpOpen, setDataPopUpOpen] = useState(false);
   const [popUpDetails, setPopUpDetails] = useState({});
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  //For enhanced table head
+  // for enhanced table head
   const [orderBy, setOrderBy] = useState("");
   const [order, setOrder] = useState("asc");
 
+  // used to show the data dictionary popover
+  const [dataDictionary, setDataDictionary] = useState({});
+  useEffect(() => {
+    let dict = requestDataDictionary();
+    let dictObj = {};
+    dict.then((data) => {
+      data.map((row) => {
+        let tmp = new Object();
+        tmp[row["col_name"]] = row["description"];
+        dictObj = { ...dictObj, ...tmp };
+      });
+      console.log(dictObj);
+      setDataDictionary(dictObj);
+    });
+  }, []);
+
+  //
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -129,6 +143,7 @@ export function ResolveTable({ tableData }) {
             open={dataPopUpOpen}
             onClose={handleClickClose}
             row={popUpDetails}
+            dataDictionary={dataDictionary}
           />
         </Paper>
       </>

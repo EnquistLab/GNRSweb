@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useState } from "react";
 import {
   Box,
   Dialog,
@@ -9,11 +9,15 @@ import {
   TableCell,
   TableBody,
   Table,
+  Popover,
+  Typography,
 } from "@material-ui/core";
+import HelpIcon from "@material-ui/icons/Help";
+import { makeStyles } from "@material-ui/core/styles";
 
 // shows the dialog with details of each row
 export default function DetailsDialog(props) {
-  let { onClose, open, row,  } = props;
+  let { onClose, open, row, dataDictionary } = props;
   // make a copy of the object being displayed
   let dataToDisplay = { ...row };
   // delete rows
@@ -28,7 +32,12 @@ export default function DetailsDialog(props) {
             <TableBody>
               {Object.entries(dataToDisplay).map(([key, value], idx) => (
                 <TableRow key={idx}>
-                  <TableCell>{key}</TableCell>
+                  <TableCell>
+                    <DataDictionaryPopover
+                      field={key}
+                      description={dataDictionary[key]}
+                    />
+                  </TableCell>
                   <TableCell>{value}</TableCell>
                 </TableRow>
               ))}
@@ -43,3 +52,58 @@ export default function DetailsDialog(props) {
   );
 }
 
+// TODO: move the popover to a separate file
+const useStyles = makeStyles((theme) => ({
+  popover: {
+    pointerEvents: "none",
+  },
+}));
+
+function DataDictionaryPopover({ field, description }) {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
+
+  return (
+    <div>
+      <Box display='flex' alignItems='center' flexDirection='row'>
+        <Box>
+          {field}
+        </Box>
+        <Box>
+          <HelpIcon
+            style={{width:12, height:12}}
+            onMouseEnter={handlePopoverOpen}
+            onMouseLeave={handlePopoverClose}
+          />
+        </Box>
+      </Box>
+
+      <Popover
+        open={open}
+        anchorEl={anchorEl}
+        className={classes.popover}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
+      >
+        <Box m={2} maxWidth='300px'>
+          <Typography>{description}</Typography>
+        </Box>
+      </Popover>
+    </div>
+  );
+}
