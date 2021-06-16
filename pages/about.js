@@ -4,10 +4,11 @@ import { Layout } from "../components/";
 import { requestCollaborators } from "../actions/";
 import { Typography } from "@material-ui/core";
 
-function About() {
+function About({sources}) {
   return (
     <Layout>
-      <Typography>Test</Typography>
+      <Typography variant='h3'>About</Typography>
+      {sources}
     </Layout>
   );
 }

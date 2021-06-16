@@ -130,8 +130,8 @@ export function LowResMenu() {
         <MenuItem onClick={handleClose} component={MUILink} href="/cite">
           Cite
         </MenuItem>
-        <MenuItem onClick={handleClose} component={MUILink} href="/source">
-          Source
+        <MenuItem onClick={handleClose} component={MUILink} href="/about">
+          About
         </MenuItem>
       </Menu>
     </div>
