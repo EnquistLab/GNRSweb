@@ -1,15 +1,20 @@
 import React from "react";
 
-import {
-  Layout,
-} from "../components/";
+import { Layout } from "../components/";
+import { requestCollaborators } from "../actions/";
+import { Typography } from "@material-ui/core";
 
-import {Typography} from '@material-ui/core';
-
-export default function About() {
+function About() {
   return (
-      <Layout>
-        <Typography>Test</Typography>
-      </Layout>
-  )
+    <Layout>
+      <Typography>Test</Typography>
+    </Layout>
+  );
 }
+
+About.getInitialProps = async () => {
+  let sources = await requestCollaborators();
+  return { sources: sources };
+};
+
+export default About;
