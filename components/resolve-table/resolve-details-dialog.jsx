@@ -52,15 +52,7 @@ export default function DetailsDialog(props) {
   );
 }
 
-// TODO: move the popover to a separate file
-const useStyles = makeStyles((theme) => ({
-  popover: {
-    pointerEvents: "none",
-  },
-}));
-
 function DataDictionaryPopover({ field, description }) {
-  const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -88,7 +80,7 @@ function DataDictionaryPopover({ field, description }) {
       <Popover
         open={open}
         anchorEl={anchorEl}
-        className={classes.popover}
+        style={{pointerEvents: "none",}}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "center",

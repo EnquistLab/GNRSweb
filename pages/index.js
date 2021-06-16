@@ -32,11 +32,8 @@ export default function Index() {
 
     // resolve the names
     let resolvedNames = await requestResolveNames(splitNames);
-
-    // handle errors here?
-
-    // console.log(resolvedNames)
     setResolvedNames(resolvedNames);
+
     // hide spinner
     setIsProcessing(false);
   };

@@ -75,6 +75,16 @@ export function TopBar() {
                 Data Dictionary
               </Button>
             </Link>
+            <Link href="/about" passHref>
+              <Button component="a" color="inherit">
+                About
+              </Button>
+            </Link>
+            <Link href="/cite" passHref>
+              <Button component="a" color="inherit">
+                Cite
+              </Button>
+            </Link>
           </Hidden>
         </Toolbar>
       </Container>
@@ -116,6 +126,12 @@ export function LowResMenu() {
         </MenuItem>
         <MenuItem onClick={handleClose} component={MUILink} href="/data_dictionary">
           Data Dictionary
+        </MenuItem>
+        <MenuItem onClick={handleClose} component={MUILink} href="/cite">
+          Cite
+        </MenuItem>
+        <MenuItem onClick={handleClose} component={MUILink} href="/source">
+          Source
         </MenuItem>
       </Menu>
     </div>
