@@ -70,19 +70,34 @@ export function TopBar() {
                 Home
               </Button>
             </Link>
-            <Link href="/data_dictionary" passHref>
-              <Button component="a" color="inherit">
-                Data Dictionary
-              </Button>
-            </Link>
             <Link href="/about" passHref>
               <Button component="a" color="inherit">
                 About
               </Button>
             </Link>
+            <Link href="/instructions" passHref>
+              <Button component="a" color="inherit">
+                Instructions
+              </Button>
+            </Link>
+            <Link href="/gnrsapi" passHref>
+              <Button component="a" color="inherit">
+                API
+              </Button>
+            </Link>
+            <Link href="/sources" passHref>
+              <Button component="a" color="inherit">
+                Sources
+              </Button>
+            </Link>
             <Link href="/cite" passHref>
               <Button component="a" color="inherit">
                 Cite
+              </Button>
+            </Link>
+            <Link href="/data_dictionary" passHref>
+              <Button component="a" color="inherit">
+                Data Dictionary
               </Button>
             </Link>
           </Hidden>
@@ -124,14 +139,23 @@ export function LowResMenu() {
         <MenuItem onClick={handleClose} component={MUILink} href="/">
           Home
         </MenuItem>
+        <MenuItem onClick={handleClose} component={MUILink} href="/about">
+          About
+        </MenuItem>
         <MenuItem onClick={handleClose} component={MUILink} href="/data_dictionary">
           Data Dictionary
         </MenuItem>
+        <MenuItem onClick={handleClose} component={MUILink} href="/instructions">
+          Instructions
+        </MenuItem>
+        <MenuItem onClick={handleClose} component={MUILink} href="/gnrsapi">
+          API
+        </MenuItem>
+        <MenuItem onClick={handleClose} component={MUILink} href="/sources">
+          Sources
+        </MenuItem>
         <MenuItem onClick={handleClose} component={MUILink} href="/cite">
           Cite
-        </MenuItem>
-        <MenuItem onClick={handleClose} component={MUILink} href="/about">
-          About
         </MenuItem>
       </Menu>
     </div>

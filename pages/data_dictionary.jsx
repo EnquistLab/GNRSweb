@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout } from "../components/";
 import { requestDataDictionary } from "../actions/";
+import { Typography } from "@material-ui/core";
 
 import {
   Table,
@@ -15,6 +16,13 @@ function DataDictionary({ dataDictionary }) {
 
   return (
     <Layout>
+		<Typography variant='h3'>Data dictionary</Typography>
+		<br />
+		<Typography variant="body1" gutterBottom align="justify">
+		Names and definitions of output fields returned by the GNRS.
+		</Typography>
+		<br />
+
       <TableContainer>
         <Table>
           <TableHead>
