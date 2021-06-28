@@ -1,82 +1,19 @@
-import { Layout } from "../components";
-import Head from "next/head";
-
-import { makeStyles } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import axios from "axios";
-import Link from "next/link";
+import React from "react";
+import { Layout} from "../components";
 
 import {
   Typography,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  Box,
-  Divider,
+  Link,
 } from "@material-ui/core";
 
-const apiServer = process.env.apiServer;
-const apiEndPoint = process.env.apiEndPoint;
-
-const useStyles = makeStyles((theme) => ({
-  page: {
-    padding: theme.spacing(0.5),
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-  root: {
-    flexGrow: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-  header: {
-    color: theme.palette.grey[400],
-    height: "15px",
-  },
-  image: {
-    padding: theme.spacing(0),
-    objectFit: "none",
-    flex: 1,
-    flexGrow: 1,
-  },
-  card: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-  action: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    // alignSelf: "center",
-    // bottom: 0,
-    // flex: 1
-  },
-}));
-
-function ApiApp({  }) {
-  const classes = useStyles();
+function ApiApp() {
 
   return (
     <>
-      <Head>
-        <title>GNRS - API</title>
-        <Link rel="icon" href="/favicon.ico" />
-      </Head>
       <Layout>
-
         <Typography variant="h3" align="justify" display="block" gutterBottom>
           GNRS Application Programming Interfaces
         </Typography>
-        
         <div id="tnrsapi">
           <Typography variant="h5" gutterBottom align="justify">
             GNRS API
