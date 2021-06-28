@@ -18,7 +18,6 @@ import {
 const apiServer = process.env.apiServer;
 
 function SourcesApp({ sourcesAvailable }) {
-  console.log(sourcesAvailable);
   return (
     <>
       <Layout>
