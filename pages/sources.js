@@ -1,5 +1,7 @@
+import React from "react";
 import { Layout } from "../components";
-import Head from "next/head";
+
+import { requestSources } from "../actions/";
 
 import {
   Typography,
@@ -10,66 +12,33 @@ import {
   Box,
   Divider,
   Hidden,
+  Link,
 } from "@material-ui/core";
 
-import axios from "axios";
-
 const apiServer = process.env.apiServer;
-const apiEndPoint = process.env.apiEndPoint;
-
-const loadSources = async () => {
-  // build query
-  const query = {
-    opts: {
-      mode: "sources",
-    },
-  };
-  // return axios request
-  return await axios
-    .post(apiEndPoint, query, {
-      headers: { "Content-Type": "application/json" },
-    })
-    .then(
-      (response) => {
-        // setSources(response.data);
-        let source_list = response.data;
-        return source_list;
-      },
-      () => {
-        alert("There was an error while retrieving the sources");
-      }
-    );
-};
 
 function SourcesApp({ sourcesAvailable }) {
+  console.log(sourcesAvailable);
   return (
     <>
-      <Head>
-        <title>GNRS - Sources</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <Layout>
-        <Typography
-          variant="h3"
-          align="justify"
-          display="block"
-          gutterBottom="True"
-        >
+        <Typography variant="h3" align="justify" display="block" gutterBottom>
           Sources
         </Typography>
 
         <div id="currentsources">
-          <Typography variant="h5" gutterBottom="True" align="justify">
+          <Typography variant="h5" gutterBottom align="justify">
             Geographic data providers
           </Typography>
-          <Typography variant="body2" gutterBottom="True" align="justify">
+          <Typography variant="body2" gutterBottom align="justify">
             {/* TODO: dynamic numbering here */}
-            The GNRS the following sources of geographic and political division names:
+            The GNRS the following sources of geographic and political division
+            names:
           </Typography>
 
           <List>
-            {sourcesAvailable.map((s) => (
-              <>
+            {sourcesAvailable.map((s, k) => (
+              <div key={k}>
                 <ListItem>
                   <Hidden xsDown>
                     <ListItemIcon>
@@ -85,32 +54,32 @@ function SourcesApp({ sourcesAvailable }) {
                     </ListItemIcon>
                   </Hidden>
                   <ListItemText>
-                    <Typography gutterBottom={true} variant="h7" component="h2">
-                      {s.sourceNameFull} - {s.sourceName.toUpperCase()}
+                    <Typography gutterBottom variant="h6" component="h2">
+                      {s.source_name_full} - {s.source_name.toUpperCase()}
                     </Typography>
-                    <Typography variant="body2" color="black" component="p">
+                    <Typography variant="body2" component="p">
                       {s.description} <br />
                       <br />
-                      Date Accessed: {s.tnrsDateAccessed}
+                      Date Accessed: {s.tnrs_date_accessed}
                     </Typography>
                     <br />
                     <Box>
-                      <a href={s.dataUrl} size="small" color="primary">
+                      <Link href={s.data_url} size="small" color="primary">
                         Data
-                      </a>{" "}
-                      <a href={s.sourceUrl} size="small" color="primary">
+                      </Link>{" "}
+                      &nbsp;&nbsp;
+                      <Link href={s.source_url} size="small" color="primary">
                         Learn More
-                      </a>
+                      </Link>
                     </Box>
                   </ListItemText>
                 </ListItem>
                 <Divider />
-              </>
+              </div>
             ))}
           </List>
         </div>
         <br />
-
         <br />
       </Layout>
     </>
@@ -119,8 +88,8 @@ function SourcesApp({ sourcesAvailable }) {
 
 // making initial props available
 SourcesApp.getInitialProps = async () => {
-  let sources = await loadSources();
-  return { sourcesAvailable: sources };
+  let dict = await requestSources();
+  return { sourcesAvailable: dict };
 };
 
 export default SourcesApp;

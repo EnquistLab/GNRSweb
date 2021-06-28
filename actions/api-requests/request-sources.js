@@ -5,7 +5,7 @@ const apiEndPoint = process.env.apiEndPoint;
 export const requestSources = async () => {
   const parseObject = {
     opts: {
-      mode: "citations",
+      mode: "sources",
     },
   };
 
