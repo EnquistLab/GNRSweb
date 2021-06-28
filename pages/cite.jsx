@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import { React, useState } from "react";
 
 import { Layout } from "../components/";
 import { requestCitations } from "../actions/";
@@ -37,13 +37,15 @@ const renderCitations = (citationsAvailable) => {
     }
 
     let parsedRendered =
-      parsed.format("bibliography", {
-        format: "text",
-        template: "apa",
-        lang: "en-US",
-        // remove part of the html that contains the closing div tag
-        // and add the accessed date
-      }).slice(0, -1) + accessed_date;
+      parsed
+        .format("bibliography", {
+          format: "text",
+          template: "apa",
+          lang: "en-US",
+          // remove part of the html that contains the closing div tag
+          // and add the accessed date
+        })
+        .slice(0, -1) + accessed_date;
 
     result[citation.source] = (
       <div>
@@ -103,15 +105,15 @@ function BibTexDialog({ displayText }) {
   );
 }
 
-
 function CiteApp({ citations }) {
-  let renderedCitations = renderCitations(citations)
-  let citationsList = Object.keys(renderedCitations)
-  console.log(renderedCitations)
+  let renderedCitations = renderCitations(citations);
+  let citationsList = Object.keys(renderedCitations);
   return (
     <Layout>
-      <Typography variant="h3" gutterBottom>How to Cite the GNRS</Typography>
-      {citationsList.map(v=>renderedCitations[v])}
+      <Typography variant="h3" gutterBottom>
+        How to Cite the GNRS
+      </Typography>
+      {citationsList.map((v) => renderedCitations[v])}
     </Layout>
   );
 }
