@@ -45,6 +45,9 @@ export function TopBar() {
     <AppBar position="static">
       <Container className={classes.container}>
         <Toolbar>
+          <Box mr={2}>
+            <img height='40' src='/logo.png'/>
+          </Box>
           <Box mr={1}>
             <Link href="/" passHref>
               <Typography
