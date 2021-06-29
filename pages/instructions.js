@@ -1,9 +1,7 @@
 import React from "react";
 import { Layout } from "../components";
 
-import { Typography } from "@material-ui/core";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
+import { Typography, List, ListItem, Link } from "@material-ui/core";
 
 function InstructionsApp() {
   return (
@@ -54,7 +52,7 @@ function InstructionsApp() {
                 3. <strong>Cite</strong>. Please cite the GNRS and all GNRS data
                 sources used in any publication which includes political
                 divisions names resolved using the GNRS. See{" "}
-                <a href="/cite">Cite</a> for details.
+                <Link href="/cite">Cite</Link> for details.
               </Typography>
             </ListItem>
           </List>
