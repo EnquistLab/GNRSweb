@@ -160,8 +160,8 @@ function EnhancedTableHead(props) {
   let tableColumns = [
     ["country_verbatim", "Political Division Submitted"],
     ["country", "Country"],
-    ["county_parish", "County"],
     ["state_province", "State Province"],
+    ["county_parish", "County"],
   ];
 
   // we render the names using a map
