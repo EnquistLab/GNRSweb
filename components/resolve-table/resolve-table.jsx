@@ -78,8 +78,8 @@ export function ResolveTable({ tableData }) {
         <TableCell>
           {[
             row.country_verbatim,
-            row.county_parish_verbatim,
             row.state_province_verbatim,
+            row.county_parish_verbatim,
           ]
             .filter((row) => row)
             .join(":")}
