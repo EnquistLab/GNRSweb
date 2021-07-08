@@ -8,6 +8,7 @@ export default function Index() {
   const [resolvedNames, setResolvedNames] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isBadInput, setIsBadInput] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleResolveNames = async (names) => {
     // clear the table after submiting
@@ -19,12 +20,15 @@ export default function Index() {
     // use the CSV library to read the names
     let splitNames = readString(names)["data"];
     // when we pass it to the API we add one empty column
+
     splitNames = splitNames
       .filter((row) => row.length == 3) // this will remove blank lines
       .map((row) => [""].concat(row));
 
+    // client error handling
     // check if all elements have 4 columns
     if (splitNames.every((row) => row.length == 4) == false) {
+      setErrorMessage("All rows must have 3 columns");
       setIsProcessing(false);
       setIsBadInput(true);
       return;
@@ -32,9 +36,20 @@ export default function Index() {
 
     // resolve the names
     let resolvedNames = await requestResolveNames(splitNames);
-    setResolvedNames(resolvedNames);
 
-    // hide spinner
+    // server side error handling
+    // if the response of the API is a string instead of an object
+    // it is because the API returned an error
+    if (typeof resolvedNames === "string") {
+      // here resolved names should contain the error returned by the API
+      setErrorMessage(resolvedNames);
+      setIsProcessing(false);
+      setIsBadInput(true);
+      return;
+    }
+
+    // hide spinner and change the state
+    setResolvedNames(resolvedNames);
     setIsProcessing(false);
   };
 
@@ -45,7 +60,7 @@ export default function Index() {
         <Box pt={2}>
           <Paper color="primary" variant="outlined">
             <Box m={2}>
-              <Typography>All rows must have 3 columns</Typography>
+              <Typography>{errorMessage}</Typography>
             </Box>
           </Paper>
         </Box>
