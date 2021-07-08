@@ -1,7 +1,7 @@
 module.exports = {
   trailingSlash: true,
   env: {
-    apiServer: "http://vegbiendev.nceas.ucsb.edu:9875/", 
+    apiServer: "https://gnrsapi.xyz/",
    // production api
     apiEndPoint: "https://gnrsapi.xyz/gnrs_api.php",
     // development api
