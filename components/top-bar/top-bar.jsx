@@ -1,5 +1,6 @@
-import { useState, React } from "react";
+import { useState, useEffect, React } from "react";
 import Link from "next/link";
+import { requestMeta } from "../../actions";
 
 import {
   Box,
@@ -40,13 +41,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function TopBar() {
+  // API version
+  const [apiVersion, setApiVersion] = useState("");
+  useEffect(() => {
+    let metaPromise = requestMeta();
+    metaPromise.then((meta) => {
+      let codeVersion = meta[0]["code_version"];
+      setApiVersion(codeVersion);
+    });
+  }, []);
+
   const classes = useStyles();
   return (
     <AppBar position="static">
       <Container className={classes.container}>
         <Toolbar>
           <Box mr={2}>
-            <img height='40' src='/logo.png'/>
+            <img height="40" src="/logo.png" />
           </Box>
           <Box mr={1}>
             <Link href="/" passHref>
@@ -65,9 +76,12 @@ export function TopBar() {
             <LowResMenu />
           </Hidden>
           <Hidden smDown>
-            <Typography variant="overline" className={classes.title}>
-              Geografic Name Resolution Service
-            </Typography>
+            <Link href="/cite" passHref>
+              <Typography variant="overline" className={classes.title}>
+                Geografic Name Resolution Service
+                {" " + apiVersion}
+              </Typography>
+            </Link>
             <Link href="/" passHref>
               <Button component="a" color="inherit">
                 Home
@@ -145,10 +159,18 @@ export function LowResMenu() {
         <MenuItem onClick={handleClose} component={MUILink} href="/about">
           About
         </MenuItem>
-        <MenuItem onClick={handleClose} component={MUILink} href="/data_dictionary">
+        <MenuItem
+          onClick={handleClose}
+          component={MUILink}
+          href="/data_dictionary"
+        >
           Data Dictionary
         </MenuItem>
-        <MenuItem onClick={handleClose} component={MUILink} href="/instructions">
+        <MenuItem
+          onClick={handleClose}
+          component={MUILink}
+          href="/instructions"
+        >
           Instructions
         </MenuItem>
         <MenuItem onClick={handleClose} component={MUILink} href="/gnrsapi">
