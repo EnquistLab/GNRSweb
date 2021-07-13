@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 
 import { Layout } from "../components/";
-import { requestCitations } from "../actions/";
+import { requestCitations, requestMeta } from "../actions/";
 
 const Cite = require("citation-js");
 
@@ -105,7 +105,7 @@ function BibTexDialog({ displayText }) {
   );
 }
 
-function CiteApp({ citations }) {
+function CiteApp({ citations, meta }) {
   let renderedCitations = renderCitations(citations);
   let citationsList = Object.keys(renderedCitations);
   return (
@@ -114,13 +114,20 @@ function CiteApp({ citations }) {
         How to Cite the GNRS
       </Typography>
       {citationsList.map((v) => renderedCitations[v])}
+      <Typography variant="h6">
+        API Version
+      </Typography>
+    <Typography variant="body1" gutterBottom>
+      {meta[0]['code_version']}
+    </Typography>
     </Layout>
   );
 }
 
 CiteApp.getInitialProps = async () => {
   let sources = await requestCitations();
-  return { citations: sources };
+  let meta = await requestMeta();
+  return { citations: sources, meta: meta };
 };
 
 export default CiteApp;
