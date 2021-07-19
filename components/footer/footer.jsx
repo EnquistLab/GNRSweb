@@ -5,25 +5,33 @@ import { ContainerLG } from "../";
 function GNRSFooter() {
   return (
     <>
-      <Box display="flex" flexDirection="row" alignItems="right" justifyContent='center' mt={4}>
-        <Box>
-          <Box display="flex" alignItems="flex-end">
-            <Box>
-              <img src="/world.png" height="80"></img>
+      <Box mt={4}/>
+      <Grid
+        container
+        direction='row'
+        justify='center'
+        alignItems='flex-start'
+      >
+        <Grid item xs={12} md={5}>
+          <Box pb={4}>
+            <Box display="flex" alignItems="flex-end">
+              <Box>
+                <img src="/world.png" height="80"></img>
+              </Box>
+              <Box ml={2}>
+                <Typography variant="h3">GNRS</Typography>
+                <Typography variant="h6">
+                  Geographic Name Resolution Service
+                </Typography>
+              </Box>
             </Box>
-            <Box ml={2}>
-              <Typography variant="h3">GNRS</Typography>
-              <Typography variant="h6">
-                Geographic Name Resolution Service
-              </Typography>
+            <Box mt={1}>
+              An online tool for the standardization of global political division
+              names.
             </Box>
           </Box>
-          <Box mt={1}>
-            An online tool for the standardization of global political division
-            names.
-          </Box>
-        </Box>
-        <Box width={1 / 2}>
+        </Grid>
+        <Grid item xs={12} md={5}>
           <Grid container spacing={2} alignItems="center">
             <Grid xs={4} item>
               <Box display="flex">
@@ -81,8 +89,9 @@ function GNRSFooter() {
               GADM
             </Grid>
           </Grid>
-        </Box>
-      </Box>
+ 
+        </Grid>
+      </Grid>
     </>
   );
 }
