@@ -5,7 +5,7 @@ import { ContainerLG } from "../";
 function GNRSFooter() {
   return (
     <>
-      <Box display="flex" flexDirection="row" alignItems="left" mt={4}>
+      <Box display="flex" flexDirection="row" alignItems="right" justifyContent='center' mt={4}>
         <Box>
           <Box display="flex" alignItems="flex-end">
             <Box>
