@@ -5,39 +5,39 @@ import { ContainerLG } from "../";
 function GNRSFooter() {
   return (
     <>
-      <Box mt={4}/>
-      <Grid
-        container
-        direction='row'
-        justify='center'
-        alignItems='flex-start'
-      >
+      <Box mt={4} />
+      <Grid container direction="row" justify="center" alignItems="flex-start">
         <Grid item xs={12} md={5}>
-          <Box pb={4}>
-            <Box display="flex" alignItems="flex-end">
-              <Box>
+          <Box display="flex" justifyContent="center">
+            <Box
+              pb={4}
+              display="flex"
+              flexDirection="column"
+              alignItems="flex-start"
+            >
+              <Box display="flex" alignItems="left">
                 <img src="/world.png" height="80"></img>
+                <Box>
+                  <Typography variant="h3">GNRS</Typography>
+                  <Typography variant="h6">
+                    Geographic Name Resolution Service
+                  </Typography>
+                </Box>
               </Box>
-              <Box ml={2}>
-                <Typography variant="h3">GNRS</Typography>
-                <Typography variant="h6">
-                  Geographic Name Resolution Service
-                </Typography>
+              <Box mt={1}>
+                An online tool for the standardization of global political
+                division names.
               </Box>
-            </Box>
-            <Box mt={1}>
-              An online tool for the standardization of global political division
-              names.
             </Box>
           </Box>
         </Grid>
         <Grid item xs={12} md={5}>
-          <Grid container spacing={2} alignItems="center">
+          <Grid container spacing={1} alignItems="center">
             <Grid xs={4} item>
               <Box display="flex">
                 <Box flexGrow={1}></Box>
                 <Box>
-                  <img src="/bien.png" height="50"></img>
+                  <img src="/bien.png" height="35"></img>
                 </Box>
               </Box>
             </Grid>
@@ -89,7 +89,6 @@ function GNRSFooter() {
               GADM
             </Grid>
           </Grid>
- 
         </Grid>
       </Grid>
     </>
