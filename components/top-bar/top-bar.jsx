@@ -78,7 +78,7 @@ export function TopBar() {
           <Hidden smDown>
             <Link href="/cite" passHref>
               <Typography variant="overline" className={classes.title}>
-                Geografic Name Resolution Service
+                Geographic Name Resolution Service
                 {" " + apiVersion}
               </Typography>
             </Link>
