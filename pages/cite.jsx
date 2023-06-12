@@ -1,4 +1,5 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 
 import { Layout } from "../components/";
 import { requestCitations, requestMeta } from "../actions/";
@@ -15,52 +16,6 @@ import {
   DialogTitle,
   Link,
 } from "@material-ui/core";
-
-const renderCitations = (citationsAvailable) => {
-  var result = {};
-  citationsAvailable.map((citation) => {
-    // parse data
-    let parsed = new Cite(citation.citation);
-    // get today's data
-    let options = { year: "numeric", month: "short", day: "numeric" };
-    let today = new Date();
-    // fill accessed_date
-    var accessed_date =
-      ", " +
-      parsed.data[0].note?.replace(
-        "<date_of_access>",
-        today.toLocaleDateString("en-US", options)
-      );
-    // check if note was empty
-    if (accessed_date == ", undefined") {
-      accessed_date = "";
-    }
-
-    let parsedRendered =
-      parsed
-        .format("bibliography", {
-          format: "text",
-          template: "apa",
-          lang: "en-US",
-          // remove part of the html that contains the closing div tag
-          // and add the accessed date
-        })
-        .slice(0, -1) + accessed_date;
-
-    result[citation.source] = (
-      <div>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: parsedRendered,
-          }}
-        ></div>
-        <BibTexDialog displayText={citation.citation} />
-        <br />
-      </div>
-    );
-  });
-  return result;
-};
 
 function BibTexDialog({ displayText }) {
   const [open, setOpen] = useState(false);
@@ -104,30 +59,68 @@ function BibTexDialog({ displayText }) {
     </div>
   );
 }
+BibTexDialog.propTypes = {
+  displayText: PropTypes.string
+};
 
-function CiteApp({ citations, meta }) {
-  let renderedCitations = renderCitations(citations);
-  let citationsList = Object.keys(renderedCitations);
+function CiteApp() {
+  let [meta, setMeta] = useState([])
+  let [citations, setCitations] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      // get citations from the API
+      let meta = await requestMeta();
+      setMeta(meta[0])
+
+      let citations = await requestCitations();
+      var parsedCitations = []
+      // parse them using citation-js
+      for (let c in citations) {
+        let parsed = new Cite(citations[c].citation);
+
+        let formatted = parsed.format('bibliography', {
+          format: 'html',
+          template: 'apa',
+          lang: 'en-US'
+        })
+        // push everything to the vector
+        parsedCitations.push({ 'source': citations[c].source, 'parsed': parsed, 'raw': citations[c].citation, 'formatted': formatted })
+      }
+      setCitations(parsedCitations)
+    }
+    fetchData()
+  }, [])
+
   return (
     <Layout>
       <Typography variant="h3" gutterBottom>
         How to Cite the GNRS
       </Typography>
-      {citationsList.map((v) => renderedCitations[v])}
+      {/* {citationsList.map((v) => renderedCitations[v])} */}
+
+
+      {citations.map((s, k) => (
+        <div key={k}>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: s.formatted,
+            }}
+          ></div>
+          <BibTexDialog displayText={s.raw} />
+          <br />
+        </div>
+      ))
+      }
+
       <Typography variant="h6">
         API Version
       </Typography>
-    <Typography variant="body1" gutterBottom>
-      {meta[0]['code_version']}
-    </Typography>
-    </Layout>
+      <Typography variant="body1" gutterBottom>
+        {meta.code_version}
+      </Typography>
+    </Layout >
   );
 }
-
-CiteApp.getInitialProps = async () => {
-  let sources = await requestCitations();
-  let meta = await requestMeta();
-  return { citations: sources, meta: meta };
-};
 
 export default CiteApp;
