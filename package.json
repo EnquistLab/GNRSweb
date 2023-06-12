@@ -6,7 +6,7 @@
     "@material-ui/core": "4.11.3",
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
-    "citation-js": "^0.5.1",
+    "citation-js": "^0.6.8",
     "clsx": "^1.0.4",
     "file-saver": "^2.0.5",
     "json2csv": "^5.0.6",
