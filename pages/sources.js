@@ -1,5 +1,5 @@
-import React from "react";
 import { Layout } from "../components";
+import { useState, useEffect, React } from "react";
 
 import { requestSources } from "../actions/";
 
@@ -17,7 +17,19 @@ import {
 
 const apiServer = process.env.apiServer;
 
-function SourcesApp({ sourcesAvailable }) {
+function SourcesApp() {
+
+  let [sourcesState, setSourcesState] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      let sources = await requestSources();
+      console.log(sources)
+      setSourcesState(sources);
+    }
+    fetchData();
+  }, []);
+
+
   return (
     <>
       <Layout>
@@ -36,7 +48,7 @@ function SourcesApp({ sourcesAvailable }) {
           </Typography>
 
           <List>
-            {sourcesAvailable.map((s, k) => (
+            {sourcesState.map((s, k) => (
               <div key={k}>
                 <ListItem>
                   <Hidden xsDown>
@@ -59,7 +71,7 @@ function SourcesApp({ sourcesAvailable }) {
                     <Typography variant="body2" component="p">
                       {s.description} <br />
                       <br />
-                      Date Accessed: {s.tnrs_date_accessed}
+                      Date Accessed: {s.date_accessed}
                     </Typography>
                     <br />
                     <Box>
