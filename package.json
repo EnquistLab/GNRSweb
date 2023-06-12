@@ -1,21 +1,21 @@
 {
   "name": "GNRSweb",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "latest",
+    "@material-ui/core": "4.11.3",
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
     "citation-js": "^0.5.1",
-    "clsx": "latest",
+    "clsx": "^1.0.4",
     "file-saver": "^2.0.5",
     "json2csv": "^5.0.6",
     "lodash": "^4.17.21",
     "next": "^10.2.3",
     "papaparse": "^5.3.1",
-    "prop-types": "latest",
-    "react": "latest",
-    "react-dom": "latest",
+    "prop-types": "^15.6.2",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
     "react-papaparse": "^3.14.0"
   },
   "scripts": {
