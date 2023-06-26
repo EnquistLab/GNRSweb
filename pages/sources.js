@@ -97,10 +97,5 @@ function SourcesApp() {
   );
 }
 
-// making initial props available
-SourcesApp.getInitialProps = async () => {
-  let dict = await requestSources();
-  return { sourcesAvailable: dict };
-};
 
 export default SourcesApp;
