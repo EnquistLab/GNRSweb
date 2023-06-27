@@ -30,10 +30,12 @@ export default function Index() {
       return;
     }
 
+    // filter out lines that have more or less than 3 columns
     splitNames = splitNames
-      .filter((row) => row.length == 3) // this will remove blank lines
+      .filter((row) => row.length == 3)
       .map((row) => [""].concat(row)); // add an extra column to the data structure
     // the API expects 4 columns, where the first column is the ID
+    // if the user submits "USA,," the final result will be ['', 'USA', '', '']
 
     // resolve the names
     let resolvedNames = await requestResolveNames(splitNames);
