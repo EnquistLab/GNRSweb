@@ -41,7 +41,6 @@ export function ResolveTable({ tableData }) {
         tmp[row["col_name"]] = row["description"];
         dictObj = { ...dictObj, ...tmp };
       });
-      console.log(dictObj);
       setDataDictionary(dictObj);
     });
   }, []);
