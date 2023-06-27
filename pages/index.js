@@ -21,18 +21,19 @@ export default function Index() {
     let splitNames = readString(names)["data"];
     // when we pass it to the API we add one empty column
 
-    splitNames = splitNames
-      .filter((row) => row.length == 3) // this will remove blank lines
-      .map((row) => [""].concat(row));
-
     // client error handling
     // check if all elements have 4 columns
-    if (splitNames.every((row) => row.length == 4) == false) {
+    if (splitNames.every((row) => row.length == 3) == false) {
       setErrorMessage("All rows must have 3 columns");
       setIsProcessing(false);
       setIsBadInput(true);
       return;
     }
+
+    splitNames = splitNames
+      .filter((row) => row.length == 3) // this will remove blank lines
+      .map((row) => [""].concat(row)); // add an extra column to the data structure
+    // the API expects 4 columns, where the first column is the ID
 
     // resolve the names
     let resolvedNames = await requestResolveNames(splitNames);
