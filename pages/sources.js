@@ -23,7 +23,6 @@ function SourcesApp() {
   useEffect(() => {
     async function fetchData() {
       let sources = await requestSources();
-      console.log(sources)
       setSourcesState(sources);
     }
     fetchData();
