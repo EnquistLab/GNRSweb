@@ -5,7 +5,7 @@ import createEmotionServer from '@emotion/server/create-instance';
 import theme, { roboto } from '../src/theme';
 import createEmotionCache from '../src/createEmotionCache';
 
-export default function MyDocument(props) {
+export default function GNRSDocument(props) {
   const { emotionStyleTags } = props;
 
   return (
@@ -27,7 +27,7 @@ export default function MyDocument(props) {
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with static-site generation (SSG).
-MyDocument.getInitialProps = async (ctx) => {
+GNRSDocument.getInitialProps = async (ctx) => {
   // Resolution order
   //
   // On the server:
@@ -60,9 +60,9 @@ MyDocument.getInitialProps = async (ctx) => {
   ctx.renderPage = () =>
     originalRenderPage({
       enhanceApp: (App) =>
-        (function EnhanceApp(props) {
-          return <App emotionCache={cache} {...props} />;
-        }),
+      (function EnhanceApp(props) {
+        return <App emotionCache={cache} {...props} />;
+      }),
     });
 
   const initialProps = await Document.getInitialProps(ctx);
@@ -84,6 +84,6 @@ MyDocument.getInitialProps = async (ctx) => {
   };
 };
 
-MyDocument.propTypes = {
+GNRSDocument.propTypes = {
   emotionStyleTags: PropTypes.array.isRequired,
 };
