@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { readString } from "react-papaparse";
 import { Layout, SearchBox, ResolveTable } from "../components/";
 import { requestResolveNames } from "../actions/";
-import { Typography, Paper, Box } from "@material-ui/core";
+import { Typography, Paper, Box } from "@mui/material";
 
 export default function Index() {
   const [resolvedNames, setResolvedNames] = useState([]);

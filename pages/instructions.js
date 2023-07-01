@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout } from "../components";
 
-import { Typography, List, ListItem, Link } from "@material-ui/core";
+import { Typography, List, ListItem, Link } from "@mui/material";
 
 function InstructionsApp() {
   return (

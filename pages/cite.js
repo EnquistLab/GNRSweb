@@ -1,3 +1,4 @@
+
 import { React, useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 
@@ -15,7 +16,7 @@ import {
   DialogContentText,
   DialogTitle,
   Link,
-} from "@material-ui/core";
+} from "@mui/material";
 
 function BibTexDialog({ displayText }) {
   const [open, setOpen] = useState(false);

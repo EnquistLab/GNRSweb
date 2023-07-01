@@ -11,9 +11,9 @@ import {
   Table,
   Popover,
   Typography,
-} from "@material-ui/core";
-import HelpIcon from "@material-ui/icons/Help";
-import { makeStyles } from "@material-ui/core/styles";
+} from "@mui/material";
+import HelpIcon from "@mui/icons-material/Help";
+import makeStyles from '@mui/styles/makeStyles';
 
 // shows the dialog with details of each row
 export default function DetailsDialog(props) {

@@ -1,7 +1,7 @@
 import { useState, useEffect, React } from "react";
 import { Layout } from "../components/";
 import { requestDataDictionary } from "../actions/";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
 import {
   Table,
@@ -10,7 +10,7 @@ import {
   TableHead,
   TableCell,
   TableRow,
-} from "@material-ui/core";
+} from "@mui/material";
 
 function DataDictionary() {
   const [dataDict, setDataDict] = useState([]);

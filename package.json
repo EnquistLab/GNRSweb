@@ -1,32 +1,36 @@
 {
-  "name": "GNRSweb",
-  "version": "1.0.1",
+  "name": "material-next",
+  "version": "5.0.0",
   "private": true,
-  "dependencies": {
-    "@material-ui/core": "4.11.3",
-    "@material-ui/icons": "^4.11.2",
-    "axios": "^0.21.1",
-    "citation-js": "^0.6.8",
-    "clsx": "^1.0.4",
-    "file-saver": "^2.0.5",
-    "json2csv": "^5.0.6",
-    "lodash": "^4.17.21",
-    "next": "^10.2.3",
-    "papaparse": "^5.3.1",
-    "prop-types": "^15.6.2",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "react-papaparse": "^3.14.0"
-  },
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect --max-old-space-size=8192' next dev -p 3001",
+    "dev": "next dev",
     "build": "next build",
-    "export": "next build && next export",
     "start": "next start",
+    "lint": "next lint",
     "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
   },
+  "dependencies": {
+    "@emotion/cache": "latest",
+    "@emotion/react": "^11.11.1",
+    "@emotion/server": "latest",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.6",
+    "@mui/styles": "^5.13.2",
+    "axios": "^1.4.0",
+    "citation-js": "^0.6.8",
+    "file-saver": "^2.0.5",
+    "json2csv": "^6.0.0-alpha.2",
+    "loadash": "^1.0.0",
+    "lodash": "^4.17.21",
+    "next": "latest",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-papaparse": "^4.1.0"
+  },
   "devDependencies": {
-    "eslint": "^7.26.0",
-    "eslint-plugin-react": "^7.23.2"
+    "eslint": "latest",
+    "eslint-config-next": "latest"
   }
 }

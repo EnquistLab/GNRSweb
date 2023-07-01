@@ -6,7 +6,7 @@ import {
   Box,
   Button,
   CircularProgress,
-} from "@material-ui/core";
+} from "@mui/material";
 
 export function SearchBox({ onSubmit, isProcessing }) {
   const [names, setNames] = useState("");
