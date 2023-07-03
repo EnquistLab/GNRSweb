@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 // shows the dialog with details of each row
-function MatchThreshold({ onChangeThreshold }) {
+export function MatchThreshold({ onChangeThreshold }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -20,8 +20,13 @@ function MatchThreshold({ onChangeThreshold }) {
     setAnchorEl(null);
   };
 
+  const handleChange = () => {
+
+  }
+
   const open = Boolean(anchorEl);
   const id = open ? 'match-threshold-popover' : undefined;
+
 
   return (
     <>
@@ -41,8 +46,10 @@ function MatchThreshold({ onChangeThreshold }) {
         <Box sx={{ width: 300, px: 3, pt: 5 }}>
           <Slider
             aria-label="Match Threshold"
-            defaultValue={0.5}
+            defaultValue={1}
             valueLabelDisplay="on"
+
+            onChange={handleChange}
             step={0.01}
             marks
             min={0}
@@ -50,6 +57,10 @@ function MatchThreshold({ onChangeThreshold }) {
           />
 
         </Box>
+        <Box sx={{ mx: 3, mb: 2 }}>
+          <Button disabled={true} variant="contained">Set Threshold</Button>
+        </Box>
+
       </Popover>
     </>
   )
@@ -59,4 +70,3 @@ MatchThreshold.propTypes = {
   onChangeThreshold: PropTypes.func
 };
 
-export default MatchThreshold;

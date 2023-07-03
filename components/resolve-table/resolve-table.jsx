@@ -15,13 +15,12 @@ import {
 } from "@mui/material";
 
 import DetailsDialog from "./resolve-details-dialog";
-import MatchThreshold from "./match-threshold"
 
 import { TablePaginationActions, DownloadResults, } from "../";
 import { requestDataDictionary } from "../../actions/";
 import { getComparator, stableSort } from "../../actions";
 
-export function ResolveTable({ tableData }) {
+export function ResolveTable({ tableData, onChangeThreshold }) {
   // states
   const [dataPopUpOpen, setDataPopUpOpen] = useState(false);
   const [popUpDetails, setPopUpDetails] = useState({});
@@ -112,7 +111,6 @@ export function ResolveTable({ tableData }) {
       <Paper>
         <Box pt={2} m={2} mb={0}>
           <DownloadResults data={tableData} />
-          <MatchThreshold />
         </Box>
         <Box m={2}>
           <TableContainer>

@@ -8,6 +8,8 @@ import {
   CircularProgress,
 } from "@mui/material";
 
+import { MatchThreshold } from "../";
+
 export function SearchBox({ onSubmit, isProcessing }) {
   const [names, setNames] = useState("");
 
@@ -59,10 +61,13 @@ export function SearchBox({ onSubmit, isProcessing }) {
               Clear
             </Button>
           </Box>
+          <Box>
+            <MatchThreshold />
+          </Box>
           <Box flexGrow={1} />
           <Box>{isProcessing && <CircularProgress size={30} />}</Box>
         </Box>
       </Box>
-   </Paper>
+    </Paper>
   );
 }
