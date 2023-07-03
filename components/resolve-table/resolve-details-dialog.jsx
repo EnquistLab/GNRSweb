@@ -13,7 +13,6 @@ import {
   Typography,
 } from "@mui/material";
 import HelpIcon from "@mui/icons-material/Help";
-import makeStyles from '@mui/styles/makeStyles';
 
 // shows the dialog with details of each row
 export default function DetailsDialog(props) {
@@ -70,7 +69,7 @@ function DataDictionaryPopover({ field, description }) {
         </Box>
         <Box>
           <HelpIcon
-            style={{width:12, height:12}}
+            style={{ width: 12, height: 12 }}
             onMouseEnter={handlePopoverOpen}
             onMouseLeave={handlePopoverClose}
           />
@@ -80,7 +79,7 @@ function DataDictionaryPopover({ field, description }) {
       <Popover
         open={open}
         anchorEl={anchorEl}
-        style={{pointerEvents: "none",}}
+        style={{ pointerEvents: "none", }}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "center",

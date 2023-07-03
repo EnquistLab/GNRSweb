@@ -42,7 +42,7 @@ export function TopBar() {
 
           <Box sx={{ flexGrow: 1 }}></Box>
           <Typography variant="caption" >
-            Geographic Name Resolution Service 1.7.2
+            Geographic Name Resolution Service {apiVersion}
           </Typography>
           <Box sx={{ flexGrow: 1 }}></Box>
 
