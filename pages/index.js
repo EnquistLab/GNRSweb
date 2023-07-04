@@ -42,12 +42,7 @@ export default function Index() {
     // if the user submits "USA,," the final result will be ['', 'USA', '', '']
 
     // resolve the names
-    let resolvedNames = await requestResolveNames(splitNames, threshold, displayError);
-
-    // error with API
-    if (resolvedNames == undefined) {
-      return
-    }
+    let resolvedNames = await requestResolveNames(splitNames, threshold);
 
     // server side error handling
     // if the response of the API is a string instead of an object
@@ -57,7 +52,7 @@ export default function Index() {
       displayError(resolvedNames)
       return;
     }
-    console.log(resolvedNames)
+
     // hide spinner and change the state
     setResolvedNames(resolvedNames);
     setIsProcessing(false);
