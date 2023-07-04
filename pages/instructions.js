@@ -41,7 +41,7 @@ function InstructionsApp() {
           <ListItem>
             <Typography variant="body1">
               2. <strong>Download results</strong>. Download your results by
-              clicking on the "Download Data" control, selecting either a
+              clicking on the &quot;Download Data&quot; control, selecting either a
               comma-delimitted or tab-delimitted file.
             </Typography>
           </ListItem>
