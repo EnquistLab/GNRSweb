@@ -10,7 +10,13 @@ export default function Index() {
   const [isBadInput, setIsBadInput] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleResolveNames = async (names) => {
+  const displayError = (errorMessage) => {
+    setErrorMessage(errorMessage);
+    setIsProcessing(false);
+    setIsBadInput(true);
+  }
+
+  const handleResolveNames = async (names, threshold) => {
     // clear the table after submiting
     setResolvedNames([]);
     // show spinner
@@ -24,9 +30,7 @@ export default function Index() {
     // client error handling
     // check if all elements have 4 columns
     if (splitNames.every((row) => row.length == 3) == false) {
-      setErrorMessage("All rows must have 3 columns");
-      setIsProcessing(false);
-      setIsBadInput(true);
+      displayError("All rows must have 3 columns");
       return;
     }
 
@@ -38,19 +42,22 @@ export default function Index() {
     // if the user submits "USA,," the final result will be ['', 'USA', '', '']
 
     // resolve the names
-    let resolvedNames = await requestResolveNames(splitNames);
+    let resolvedNames = await requestResolveNames(splitNames, threshold, displayError);
+
+    // error with API
+    if (resolvedNames == undefined) {
+      return
+    }
 
     // server side error handling
     // if the response of the API is a string instead of an object
     // it is because the API returned an error
     if (typeof resolvedNames === "string") {
       // here resolved names should contain the error returned by the API
-      setErrorMessage(resolvedNames);
-      setIsProcessing(false);
-      setIsBadInput(true);
+      displayError(resolvedNames)
       return;
     }
-
+    console.log(resolvedNames)
     // hide spinner and change the state
     setResolvedNames(resolvedNames);
     setIsProcessing(false);
