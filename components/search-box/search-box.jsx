@@ -12,7 +12,7 @@ import { MatchThreshold } from "../";
 
 export function SearchBox({ onSubmit, isProcessing }) {
   const [names, setNames] = useState("");
-  const [threshold, setThreshold] = useState(0);
+  const [threshold, setThreshold] = useState(0.5);
 
   const classes = useStyles();
   return (
