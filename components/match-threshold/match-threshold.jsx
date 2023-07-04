@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 // shows the dialog with details of each row
-export function MatchThreshold({ onChangeThreshold }) {
+export function MatchThreshold({ threshold, onChangeThreshold }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -20,18 +20,29 @@ export function MatchThreshold({ onChangeThreshold }) {
     setAnchorEl(null);
   };
 
-  const handleChange = () => {
-
+  const handleChange = (e, v) => {
+    onChangeThreshold(v)
   }
 
   const open = Boolean(anchorEl);
   const id = open ? 'match-threshold-popover' : undefined;
 
+  var label;
+  switch (threshold) {
+    case 0:
+      label = 'all'
+      break;
+    case 1:
+      label = 'exact'
+      break;
+    default:
+      label = threshold
+  }
 
   return (
     <>
-      <Button aria-describedby={id} variant="contained" onClick={handleClick}>
-        Match Threshold
+      <Button aria-describedby={id} variant="outlined" onClick={handleClick}>
+        Match Threshold: {label}
       </Button>
       <Popover
         id={id}
@@ -46,9 +57,8 @@ export function MatchThreshold({ onChangeThreshold }) {
         <Box sx={{ width: 300, px: 3, pt: 5 }}>
           <Slider
             aria-label="Match Threshold"
-            defaultValue={1}
+            value={threshold}
             valueLabelDisplay="on"
-
             onChange={handleChange}
             step={0.01}
             marks
@@ -57,9 +67,6 @@ export function MatchThreshold({ onChangeThreshold }) {
           />
 
         </Box>
-        <Box sx={{ mx: 3, mb: 2 }}>
-          <Button disabled={true} variant="contained">Set Threshold</Button>
-        </Box>
 
       </Popover>
     </>
@@ -67,6 +74,7 @@ export function MatchThreshold({ onChangeThreshold }) {
 }
 
 MatchThreshold.propTypes = {
+  threshold: PropTypes.number,
   onChangeThreshold: PropTypes.func
 };
 

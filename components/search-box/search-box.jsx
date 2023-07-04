@@ -12,6 +12,7 @@ import { MatchThreshold } from "../";
 
 export function SearchBox({ onSubmit, isProcessing }) {
   const [names, setNames] = useState("");
+  const [threshold, setThreshold] = useState(0);
 
   const classes = useStyles();
   return (
@@ -45,7 +46,7 @@ export function SearchBox({ onSubmit, isProcessing }) {
           <Box>
             <Button
               // disable={loadingStatus.toString()}
-              onClick={() => onSubmit(names)}
+              onClick={() => onSubmit(names, threshold)}
               variant="contained"
               color="primary"
             >
@@ -62,7 +63,7 @@ export function SearchBox({ onSubmit, isProcessing }) {
             </Button>
           </Box>
           <Box>
-            <MatchThreshold />
+            <MatchThreshold threshold={threshold} onChangeThreshold={setThreshold} />
           </Box>
           <Box flexGrow={1} />
           <Box>{isProcessing && <CircularProgress size={30} />}</Box>

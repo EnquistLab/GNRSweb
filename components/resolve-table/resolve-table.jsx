@@ -20,7 +20,7 @@ import { TablePaginationActions, DownloadResults, } from "../";
 import { requestDataDictionary } from "../../actions/";
 import { getComparator, stableSort } from "../../actions";
 
-export function ResolveTable({ tableData, onChangeThreshold }) {
+export function ResolveTable({ tableData }) {
   // states
   const [dataPopUpOpen, setDataPopUpOpen] = useState(false);
   const [popUpDetails, setPopUpDetails] = useState({});
