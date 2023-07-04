@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import { Layout } from "../components/";
 import { requestCitations, requestMeta } from "../actions/";
 
-const Cite = require("citation-js");
+// const Cite = require("citation-js");
+import Cite from "citation-js";
 
 import {
   Typography,
