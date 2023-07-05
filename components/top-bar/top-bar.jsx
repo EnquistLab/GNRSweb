@@ -1,6 +1,9 @@
 import { useState, useEffect, React } from "react";
 import { requestMeta } from "../../actions";
 
+import LowResBar from "./low-res-bar";
+
+
 import {
   Box,
   AppBar,
@@ -28,6 +31,16 @@ export function TopBar() {
     });
   }, []);
 
+  const menuLinks = [
+    { href: '/', name: 'Home' },
+    { href: '/about', name: 'About' },
+    { href: '/instructions', name: 'Instructions' },
+    { href: '/gnrsapi', name: 'API' },
+    { href: '/sources', name: 'Sources' },
+    { href: '/cite', name: 'Cite' },
+    { href: '/data_dictionary', name: 'Data Dictionary' },
+  ]
+
   return (
     <AppBar position="static">
       <ContainerLG>
@@ -41,21 +54,26 @@ export function TopBar() {
           </Link>
 
           <Box sx={{ flexGrow: 1 }}></Box>
-          <Typography variant="caption" >
-            Geographic Name Resolution Service {apiVersion}
-          </Typography>
+
+          <Box sx={{ display: { xs: 'none', lg: 'block' } }}>
+            <Typography variant="caption" >
+              Geographic Name Resolution Service {apiVersion}
+            </Typography>
+          </Box>
           <Box sx={{ flexGrow: 1 }}></Box>
 
-          <Button color="inherit" href="/">Home</Button>
-          <Button color="inherit" href="/about">About</Button>
-          <Button color="inherit" href="/instructions">Instructions</Button>
-          <Button color="inherit" href="/gnrsapi">API</Button>
-          <Button color="inherit" href="/sources">Sources</Button>
-          <Button color="inherit" href="/cite">Cite</Button>
-          <Button color="inherit" href="/data_dictionary">Data Dictionary</Button>
+          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            {menuLinks.map((item, k) =>
+              <Button key={k} color="inherit" href={item.href}>{item.name}</Button>
+            )}
+          </Box>
+
+          <Box sx={{ display: { sm: 'block', md: 'none' } }}>
+            <LowResBar menuLinks={menuLinks} />
+          </Box>
         </Toolbar>
       </ContainerLG>
-    </AppBar>
+    </AppBar >
 
   );
 }

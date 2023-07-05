@@ -83,13 +83,10 @@ function SourcesApp() {
                   </Box>
                 </ListItemText>
               </ListItem>
-              <Divider />
             </div>
           ))}
         </List>
       </div>
-      <br />
-      <br />
     </Layout>
   </>;
 }

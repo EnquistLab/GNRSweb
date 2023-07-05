@@ -52,8 +52,6 @@ export function SearchBox({ onSubmit, isProcessing }) {
             >
               Submit
             </Button>
-          </Box>
-          <Box>
             <Button
               onClick={() => setNames("")}
               variant="contained"
@@ -61,8 +59,6 @@ export function SearchBox({ onSubmit, isProcessing }) {
             >
               Clear
             </Button>
-          </Box>
-          <Box>
             <MatchThreshold threshold={threshold} onChangeThreshold={setThreshold} />
           </Box>
           <Box flexGrow={1} />
