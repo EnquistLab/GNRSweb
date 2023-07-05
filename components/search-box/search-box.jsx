@@ -1,5 +1,4 @@
 import { useState, React } from "react";
-import { useStyles } from "./search-box.style";
 import {
   Paper,
   TextField,
@@ -14,9 +13,8 @@ export function SearchBox({ onSubmit, isProcessing }) {
   const [names, setNames] = useState("");
   const [threshold, setThreshold] = useState(0.5);
 
-  const classes = useStyles();
   return (
-    <Paper className={classes.paper}>
+    <Paper>
       <Box
         display="flex"
         flexDirection="column"
