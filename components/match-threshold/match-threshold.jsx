@@ -54,7 +54,7 @@ export function MatchThreshold({ threshold, onChangeThreshold }) {
           horizontal: 'left',
         }}
       >
-        <Box sx={{ width: 300, px: 3, pt: 5 }}>
+        <Box sx={{ width: 300, px: 4, pt: 5, pb: 1 }}>
           <Slider
             aria-label="Match Threshold"
             value={threshold}
@@ -62,7 +62,7 @@ export function MatchThreshold({ threshold, onChangeThreshold }) {
             onChange={handleChange}
             step={0.01}
             marks
-            min={0}
+            min={0.01}
             max={1}
           />
 
