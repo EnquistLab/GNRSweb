@@ -1,6 +1,6 @@
 # GNRS Web
 
-![gnrs logo](./public/logo.png)
+<img src="./public/logo.png" width="100" height="100">
 
 The Geographic Name Resolution Service (GNRS) is a tool for resolving, standardizing, and indexing political division names.
 The GNRS resolves political division names against standard world political units in the Geonames and Global Administrative Areas (GADM) databases
