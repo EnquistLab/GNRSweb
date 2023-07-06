@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Layout } from "../components/";
-import { Typography, Link } from "@material-ui/core";
+import { Typography, Link } from "@mui/material";
 
 function About() {
   return (

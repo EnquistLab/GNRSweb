@@ -1,7 +1,7 @@
-import React from "react";
+import { useState, useEffect, React } from "react";
 import { Layout } from "../components/";
 import { requestDataDictionary } from "../actions/";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
 import {
   Table,
@@ -10,18 +10,27 @@ import {
   TableHead,
   TableCell,
   TableRow,
-} from "@material-ui/core";
+} from "@mui/material";
 
-function DataDictionary({ dataDictionary }) {
+function DataDictionary() {
+  const [dataDict, setDataDict] = useState([]);
+  // retrieve the version information
+  useEffect(() => {
+    async function fetchData() {
+      let dd = await requestDataDictionary();
+      setDataDict(dd)
+    }
+    fetchData();
+  }, []);
 
   return (
     <Layout>
-		<Typography variant='h3'>Data dictionary</Typography>
-		<br />
-		<Typography variant="body1" gutterBottom align="justify">
-		Names and definitions of output fields returned by the GNRS.
-		</Typography>
-		<br />
+      <Typography variant='h3'>Data dictionary</Typography>
+      <br />
+      <Typography variant="body1" gutterBottom align="justify">
+        Names and definitions of output fields returned by the GNRS.
+      </Typography>
+      <br />
 
       <TableContainer>
         <Table>
@@ -33,7 +42,7 @@ function DataDictionary({ dataDictionary }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {dataDictionary.map((row) => (
+            {dataDict.map((row) => (
               <TableRow key={row.col_name}>
                 <TableCell>
                   {row.col_name}
@@ -52,11 +61,5 @@ function DataDictionary({ dataDictionary }) {
     </Layout>
   );
 }
-
-// making initial props available
-DataDictionary.getInitialProps = async () => {
-  let dict = await requestDataDictionary();
-  return { dataDictionary: dict };
-};
 
 export default DataDictionary;

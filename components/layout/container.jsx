@@ -1,5 +1,9 @@
-import { Container } from "@material-ui/core";
+import { Container } from "@mui/material";
 
 export function ContainerLG(props) {
-  return <Container maxWidth="lg">{props.children}</Container>;
+  return (
+    <Container maxWidth="lg">
+      {props.children}
+    </Container>
+  );
 }

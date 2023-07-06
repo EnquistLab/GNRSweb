@@ -12,10 +12,11 @@ import {
   Link,
   Table,
   Paper,
-} from "@material-ui/core";
+} from "@mui/material";
 
 import DetailsDialog from "./resolve-details-dialog";
-import { TablePaginationActions, DownloadResults } from "../";
+
+import { TablePaginationActions, DownloadResults, } from "../";
 import { requestDataDictionary } from "../../actions/";
 import { getComparator, stableSort } from "../../actions";
 
@@ -41,7 +42,6 @@ export function ResolveTable({ tableData }) {
         tmp[row["col_name"]] = row["description"];
         dictObj = { ...dictObj, ...tmp };
       });
-      console.log(dictObj);
       setDataDictionary(dictObj);
     });
   }, []);
@@ -107,47 +107,45 @@ export function ResolveTable({ tableData }) {
 
   // only show the table when data is available
   if (tableData.length > 0)
-    return (
-      <>
-        <Paper>
-          <Box pt={2} m={2} mb={0}>
-            <DownloadResults data={tableData} />
-          </Box>
-          <Box m={2}>
-            <TableContainer>
-              <Table size="small">
-                <EnhancedTableHead
-                  order={order}
-                  orderBy={orderBy}
-                  onRequestSort={handleRequestSort}
-                />
-                <TableBody>
-                  {stableSort(tableData, getComparator(order, orderBy))
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map(renderRow)}
-                </TableBody>
-              </Table>
-              <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={tableData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
+    return <>
+      <Paper>
+        <Box pt={2} m={2} mb={0}>
+          <DownloadResults data={tableData} />
+        </Box>
+        <Box m={2}>
+          <TableContainer>
+            <Table size="small">
+              <EnhancedTableHead
+                order={order}
+                orderBy={orderBy}
+                onRequestSort={handleRequestSort}
               />
-            </TableContainer>
-          </Box>
-          <DetailsDialog
-            open={dataPopUpOpen}
-            onClose={handleClickClose}
-            row={popUpDetails}
-            dataDictionary={dataDictionary}
-          />
-        </Paper>
-      </>
-    );
+              <TableBody>
+                {stableSort(tableData, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map(renderRow)}
+              </TableBody>
+            </Table>
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={tableData.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              ActionsComponent={TablePaginationActions}
+            />
+          </TableContainer>
+        </Box>
+        <DetailsDialog
+          open={dataPopUpOpen}
+          onClose={handleClickClose}
+          row={popUpDetails}
+          dataDictionary={dataDictionary}
+        />
+      </Paper>
+    </>;
   else return <></>;
 }
 

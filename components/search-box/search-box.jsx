@@ -1,19 +1,20 @@
 import { useState, React } from "react";
-import { useStyles } from "./search-box.style";
 import {
   Paper,
   TextField,
   Box,
   Button,
   CircularProgress,
-} from "@material-ui/core";
+} from "@mui/material";
+
+import { MatchThreshold } from "../";
 
 export function SearchBox({ onSubmit, isProcessing }) {
   const [names, setNames] = useState("");
+  const [threshold, setThreshold] = useState(0.5);
 
-  const classes = useStyles();
   return (
-    <Paper className={classes.paper}>
+    <Paper>
       <Box
         display="flex"
         flexDirection="column"
@@ -43,14 +44,12 @@ export function SearchBox({ onSubmit, isProcessing }) {
           <Box>
             <Button
               // disable={loadingStatus.toString()}
-              onClick={() => onSubmit(names)}
+              onClick={() => onSubmit(names, threshold)}
               variant="contained"
               color="primary"
             >
               Submit
             </Button>
-          </Box>
-          <Box>
             <Button
               onClick={() => setNames("")}
               variant="contained"
@@ -58,11 +57,12 @@ export function SearchBox({ onSubmit, isProcessing }) {
             >
               Clear
             </Button>
+            <MatchThreshold threshold={threshold} onChangeThreshold={setThreshold} />
           </Box>
           <Box flexGrow={1} />
           <Box>{isProcessing && <CircularProgress size={30} />}</Box>
         </Box>
       </Box>
-   </Paper>
+    </Paper>
   );
 }

@@ -14,7 +14,7 @@ import {
   Radio,
   Button,
   Box,
-} from "@material-ui/core";
+} from "@mui/material";
 
 
 export function DownloadResults({ data }) {
@@ -41,7 +41,7 @@ export function DownloadResults({ data }) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Download Options</DialogTitle>
         <DialogContent>
-          <Box>
+          <Box mt={1}>
             <TextField
               label="File Name"
               defaultValue={fileName}

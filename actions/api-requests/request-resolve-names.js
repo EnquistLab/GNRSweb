@@ -2,7 +2,7 @@ import axios from "axios";
 
 const apiEndPoint = process.env.apiEndPoint;
 
-export const requestResolveNames = async (queryNames) => {
+export const requestResolveNames = async (queryNames, threshold) => {
   //
   const parseObject = {
     opts: {
@@ -10,6 +10,12 @@ export const requestResolveNames = async (queryNames) => {
     },
     data: queryNames,
   };
+
+  // only include threshold if different than default
+  if (threshold !== 0.5) {
+    parseObject.opts.tfuzzy = threshold
+  }
+
   //
   return await axios
     .post(apiEndPoint, parseObject, {
@@ -18,5 +24,7 @@ export const requestResolveNames = async (queryNames) => {
     .then((response) => {
       return response.data;
       //setParsedNames(response.data);
+    }).catch(function (error) {
+      return error.message
     });
 };
