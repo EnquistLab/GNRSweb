@@ -11,8 +11,8 @@ export const requestResolveNames = async (queryNames, threshold) => {
     data: queryNames,
   };
 
-  // only include threshold if different than 0
-  if (threshold > 0) {
+  // only include threshold if different than default
+  if (threshold !== 0.5) {
     parseObject.opts.tfuzzy = threshold
   }
 
