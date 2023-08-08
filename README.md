@@ -17,33 +17,27 @@ and installing npm from https://nodejs.org/en/ (mac homebrew package manager doe
 
 Make sure you have `npm` installed before you continue:
 
-    ```
-
+```sh
 ❯ npm --version
 6.14.8
-
 ```
 
 After you install `npm` you can proceed and clone this repository.
 
 You also need node:
 
-```
-
+```sh
 ❯ node --version
 v18.16.1
-
 ```
 
 ### How to deploy to Apache
 
 1. Download the deploy.sh script from the repository:
 
-```
-
+```sh
 wget https://raw.githubusercontent.com/EnquistLab/GNRSweb/main/deploy.sh
-
-````
+```
 
 2. For safety purposes, it is recommended to create a backup of the current version that has been deployed in the Apache folder.
 
@@ -51,7 +45,7 @@ wget https://raw.githubusercontent.com/EnquistLab/GNRSweb/main/deploy.sh
 
 ```sh
 sudo sh deploy.sh <apache folder>
-````
+```
 
 ### Project structure
 
