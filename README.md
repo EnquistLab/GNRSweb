@@ -2,8 +2,8 @@
 
 <img src="./public/logo.png" width="100" height="100">
 
-TNRSweb is a web interface for the Geographic Name Resolution Service ([GNRS](https://github.com/ojalaquellueva/gnrs)).
-The GNRS resolves political division names against standard world political units in the Geonames and Global Administrative Areas (GADM) databases
+GNRSweb is a web interface for the [Geographic Name Resolution Service](https://github.com/ojalaquellueva/gnrs) (GNRS).
+The GNRS resolves country, state and county-level names against standard world political names in the [Geonames](https://www.geonames.org/) and [Global Administrative Areas] (https://gadm.org/) (GADM) databases. 
 
 ## How to contribute
 
