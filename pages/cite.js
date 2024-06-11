@@ -1,11 +1,9 @@
-
 import { React, useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 
 import { Layout } from "../components/";
 import { requestCitations, requestMeta } from "../actions/";
 
-// const Cite = require("citation-js");
 import Cite from "citation-js";
 
 import {
@@ -31,97 +29,132 @@ function BibTexDialog({ displayText }) {
   };
 
   return (
-    <div>
-      <Link href="#" onClick={handleClickOpen}>
-        [bibtex]
-      </Link>
-      <Dialog maxWidth={"md"} fullWidth open={open} onClose={handleClose}>
-        <DialogTitle id="alert-dialog-title">{"BibTeX entry"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {displayText.split("\n").map((line, index) => {
-              if ((index > 0) & (line != "}")) {
-                line = "\xa0\xa0\xa0\xa0" + line;
-              }
-              return (
-                <span key={index}>
+      <div>
+        <Link href="#" onClick={handleClickOpen}>
+          [bibtex]
+        </Link>
+        <Dialog maxWidth={"md"} fullWidth open={open} onClose={handleClose}>
+          <DialogTitle id="alert-dialog-title">{"BibTeX entry"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              {displayText.split("\n").map((line, index) => {
+                if ((index > 0) & (line !== "}")) {
+                  line = "\xa0\xa0\xa0\xa0" + line;
+                }
+                return (
+                    <span key={index}>
                   {line}
-                  <br />
+                      <br />
                 </span>
-              );
-            })}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+                );
+              })}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
   );
 }
+
 BibTexDialog.propTypes = {
   displayText: PropTypes.string
 };
 
 function CiteApp() {
-  let [meta, setMeta] = useState([])
+  let [meta, setMeta] = useState({ code_version: '' });
   let [citations, setCitations] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      // get citations from the API
       let meta = await requestMeta();
-      setMeta(meta[0])
+      setMeta(meta[0] || {});
 
       let citations = await requestCitations();
-      var parsedCitations = []
-      // parse them using citation-js
-      for (let c in citations) {
-        let parsed = new Cite(citations[c].citation);
+      // console.log(citations);
+      let gnrsPubCitations = [];
+      let gnrsAppCitations = [];
+      let otherCitations = [];
 
-        let formatted = parsed.format('bibliography', {
-          format: 'html',
-          template: 'apa',
-          lang: 'en-US'
-        })
-        // push everything to the vector
-        parsedCitations.push({ 'source': citations[c].source, 'parsed': parsed, 'raw': citations[c].citation, 'formatted': formatted })
+      // Group citations by 'gnrs' and others
+      citations.forEach(citation => {
+        if (citation.source === "gnrs.pub") {
+          gnrsPubCitations.push(citation);
+        } else if (citation.source === "gnrs.app") {
+          gnrsAppCitations.push(citation);
+        } else {
+          otherCitations.push(citation);
+        }
+      });
+
+      // Process citations for display
+      let processedCitations = [];
+      if (gnrsPubCitations.length > 0) {
+        processedCitations.push({
+          header: "If results derived from the GNRS are used in a publication, please cite the GNRS publication:",
+          citations: gnrsPubCitations
+        });
       }
-      setCitations(parsedCitations)
+      if (gnrsAppCitations.length > 0) {
+        processedCitations.push({
+          header: "In addition, please cite the GNRS application itself:",
+          citations: gnrsAppCitations
+        });
+      }
+      if (otherCitations.length > 0) {
+        processedCitations.push({
+          header: "Acknowledge the GNRS data sources as follows:",
+          citations: otherCitations
+        });
+      }
+
+      // Format citations for display
+      setCitations(processedCitations.map(group => ({
+        header: group.header,
+        citations: group.citations.map(citation => {
+          let parsed = new Cite(citation.citation);
+          return parsed.format('bibliography', {
+            format: 'html',
+            template: 'apa',
+            lang: 'en-US'
+          });
+        })
+      })));
     }
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   return (
-    <Layout>
-      <Typography variant="h3" gutterBottom>
-        How to Cite the GNRS
-      </Typography>
-      {/* {citationsList.map((v) => renderedCitations[v])} */}
+      <Layout>
+        <Typography variant="h3" gutterBottom>
+          How to Cite the GNRS
+        </Typography>
 
+        {citations.map((group, index) => (
+            <div key={index}>
+              <Typography variant="h5" gutterBottom style={{fontWeight: 'bold'}}>
+                {group.header}
+              </Typography>
+              {group.citations.map((citation, citationIndex) => (
+                  <div key={citationIndex}>
+                    <div dangerouslySetInnerHTML={{ __html: citation }}></div>
+                    <BibTexDialog displayText={citation} />
+                    <br />
+                  </div>
+              ))}
+            </div>
+        ))}
 
-      {citations.map((s, k) => (
-        <div key={k}>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: s.formatted,
-            }}
-          ></div>
-          <BibTexDialog displayText={s.raw} />
-          <br />
-        </div>
-      ))
-      }
-
-      <Typography variant="h6">
-        API Version
-      </Typography>
-      <Typography variant="body1" gutterBottom>
-        {meta.code_version}
-      </Typography>
-    </Layout >
+        <Typography variant="h6">
+          API Version
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          {meta.code_version}
+        </Typography>
+      </Layout>
   );
 }
 
