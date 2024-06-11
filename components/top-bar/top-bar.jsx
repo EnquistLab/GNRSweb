@@ -45,8 +45,10 @@ export function TopBar() {
     <AppBar position="static">
       <ContainerLG>
         <Toolbar>
-          <Box mr={2}>
-            <img height="40" src="/logo.png" />
+          <Box mr={0.5}>
+            <Link href="/" passHref>
+                <img src='/logo.png' height='40px' alt = "GNRS"></img>
+            </Link>
           </Box>
 
           <Link href="/" color="inherit" variant="h6" sx={{ pr: 2 }} underline="none">

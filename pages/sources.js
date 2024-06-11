@@ -73,11 +73,11 @@ function SourcesApp() {
                   </Typography>
                   <br />
                   <Box>
-                    <Link href={s.data_url} size="small" color="primary">
-                      Data
-                    </Link>{" "}
-                    &nbsp;&nbsp;
-                    <Link href={s.source_url} size="small" color="primary">
+                    {/*<Link href={s.data_url} size="small" color="primary">*/}
+                    {/*  Data*/}
+                    {/*</Link>{" "}*/}
+                    {/*&nbsp;&nbsp;*/}
+                    <Link href={s.source_url} size="small" color="primary" target="_blank" rel="noopener noreferrer">
                       Learn More
                     </Link>
                   </Box>
