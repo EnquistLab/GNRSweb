@@ -15,9 +15,9 @@ function GNRSFooter() {
             alignItems="flex-start"
           >
             <Box display="flex" alignItems="left">
-              <img src="/world.png" height="80"></img>
+              <img src="/world.png" height="125"></img>
               <Box>
-                <Typography variant="h3">GNRS</Typography>
+                <Typography variant="h1">GNRS</Typography>
                 <Typography variant="h6">
                   Geographic Name Resolution Service
                 </Typography>
